@@ -12,5 +12,6 @@ declare(strict_types=1);
 
 return [
     'dependencies' => [
+        'AdminServer' => Hyperf\HttpServer\ServerFactory::class,
     ],
 ];

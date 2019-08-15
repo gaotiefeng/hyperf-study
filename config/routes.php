@@ -12,4 +12,9 @@ declare(strict_types=1);
 
 use Hyperf\HttpServer\Router\Router;
 
-Router::addRoute(['GET', 'POST', 'HEAD'], '/', 'App\Controller\IndexController@index');
+include __DIR__ . '/routes/web.php';
+
+Router::addServer('admin', function () {
+    require __DIR__ . '/routes/admin.php';
+});
+
