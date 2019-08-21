@@ -33,7 +33,7 @@ return [
             'port' => 9521,
             'sock_type' => SWOOLE_SOCK_TCP,
             'callbacks' => [
-                SwooleEvent::ON_REQUEST => [AdminServer, 'onRequest'],
+                SwooleEvent::ON_REQUEST => ['AdminServer', 'onRequest'],
             ],
         ],
     ],

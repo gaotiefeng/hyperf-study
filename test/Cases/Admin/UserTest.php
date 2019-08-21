@@ -10,7 +10,15 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
 
-use Hyperf\HttpServer\Router\Router;
+namespace HyperfTest;
 
-Router::get('/', 'App\Controller\IndexController::index');
-Router::post('/', 'App\Controller\Admin\UserController::index');
+/**
+ * @internal
+ * @coversNothing
+ */
+class UserTest extends HttpTestCase
+{
+    public function testAdminUserLogin()
+    {
+    }
+}

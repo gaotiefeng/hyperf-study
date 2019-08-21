@@ -17,4 +17,3 @@ include __DIR__ . '/routes/web.php';
 Router::addServer('admin', function () {
     require __DIR__ . '/routes/admin.php';
 });
-

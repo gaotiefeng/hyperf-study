@@ -10,14 +10,12 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
 
-namespace App\Controller;
+namespace App\Service;
 
-use App\Kernel\Http\Response;
-use Hyperf\HttpServer\Contract\RequestInterface;
-use Hyperf\HttpServer\Contract\ResponseInterface;
+use Hyperf\Contract\StdoutLoggerInterface;
 use Psr\Container\ContainerInterface;
 
-abstract class Controller
+abstract class Service
 {
     /**
      * @var ContainerInterface
@@ -25,19 +23,14 @@ abstract class Controller
     protected $container;
 
     /**
-     * @var RequestInterface
+     * @var StdoutLoggerInterface
      */
-    protected $request;
-
-    /**
-     * @var ResponseInterface
-     */
-    protected $response;
+    protected $logger;
 
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-        $this->request = $container->get(RequestInterface::class);
-        $this->response = $container->get(Response::class);
+
+        $this->logger = $container->get(StdoutLoggerInterface::class);
     }
 }
