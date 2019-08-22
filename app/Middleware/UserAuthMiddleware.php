@@ -20,12 +20,12 @@ class UserAuthMiddleware implements MiddlewareInterface
     {
         $token = $request->getHeaderLine(Constants::AUTH_TOKEN);
 
-        $auth = di()->get(JwtAuth::class)->reload($token);
+        $auth = JwtAuth::instance()->reload($token);
 
-        if(!$auth->checkToken()) {
-            throw   new BusinessException(ErrorCode::NOT_TOKEN);
+        if(! $auth->check()) {
+            $auth->init(1);
         }
 
-        return$handler->handle($request);
+        return  $handler->handle($request);
     }
 }

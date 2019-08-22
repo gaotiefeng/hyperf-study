@@ -32,10 +32,15 @@ class UserBiz extends Service
 
     public function userLogin($mobile, $password)
     {
-        $model = User::query()->where(['mobile' => $mobile, 'password' => $password])->first();
+        $model = User::query()->where(['mobile' => $mobile])->first();
 
         if (empty($model)) {
             throw new BusinessException(ErrorCode::USER_NOT_EXIST);
+        }
+
+        if(!password_verify($password,$model->password))
+        {
+            throw new BusinessException(ErrorCode::USER_PASSWORD_ERROR);
         }
 
         $result['token'] = JwtAuth::instance()->init($model->id)->getToken();

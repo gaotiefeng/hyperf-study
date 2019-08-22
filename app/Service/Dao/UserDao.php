@@ -37,11 +37,26 @@ class UserDao extends Service
 
     /**
      * @param $mobile
+     * @return User
+     */
+    public function mobile($mobile)
+    {
+        $model = User::query()->where('mobile','=',$mobile)->first();
+
+        if(!empty($model)) {
+            throw new BusinessException(ErrorCode::USER_EXIST);
+        }
+        return $model;
+    }
+    /**
+     * @param $mobile
      * @param $password
      * @return bool
      */
     public function register($mobile, $password)
     {
+        $this->mobile($mobile);
+
         $model = new User();
 
         $model->mobile = $mobile;

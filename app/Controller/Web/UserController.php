@@ -76,10 +76,10 @@ class UserController extends Controller
      */
     public function userInfo()
     {
-        $userId = $this->request->input('user_id');
+        $userId = JwtAuth::instance()->build()->getUserId();
 
         if (empty($userId)) {
-            throw new BusinessException(ErrorCode::USER_NOT_EXIST);
+            throw new BusinessException(ErrorCode::USER_EXIST);
         }
 
         $result = $this->biz->userInfo($userId);

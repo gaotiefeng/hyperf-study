@@ -20,5 +20,8 @@ class UserTest extends HttpTestCase
 {
     public function testAdminUserLogin()
     {
+        $res = $this->get('/');
+
+        $this->assertSame(0, $res['code']);
     }
 }

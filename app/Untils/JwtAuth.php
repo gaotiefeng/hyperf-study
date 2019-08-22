@@ -16,8 +16,14 @@ class JwtAuth
 
     protected $key = 'api-token';
 
+    /**
+     * @var int
+     */
     protected $userId = 0;
 
+    /**
+     * @var StdoutLoggerInterface
+     */
     protected $logger;
 
     public function __construct()
@@ -39,7 +45,7 @@ class JwtAuth
         return $this;
     }
 
-    public function getUser()
+    public function getUserId()
     {
         return $this->userId;
     }
@@ -68,7 +74,7 @@ class JwtAuth
             "nbf" => $time,
             "exp" => $time + 7200,
             "data" => [
-                "user_id" => $this->build()->getUser(),
+                "user_id" => $this->build()->getUserId(),
             ]
         );
 

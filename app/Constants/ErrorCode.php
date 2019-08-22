@@ -26,12 +26,22 @@ class ErrorCode extends AbstractConstants
     const SERVER_ERROR = 500;
 
     /**
-     * token非法
+     * @Message("token非法")
      */
     const NOT_TOKEN = 1000;
 
     /**
-     * 用户名或密码不正确.
+     * @Message("用户名不存在")
      */
-    const USER_NOT_EXIST = 100;
+    const USER_NOT_EXIST = 1002;
+
+    /**
+     * @Message("用户密码错误")
+     */
+    const USER_PASSWORD_ERROR = 1003;
+
+    /**
+     * @Message("用户已经存在")
+     */
+    const USER_EXIST = 1001;
 }
