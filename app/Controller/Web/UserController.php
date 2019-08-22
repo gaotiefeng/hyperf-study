@@ -47,4 +47,40 @@ class UserController extends Controller
 
         return $this->response->success($result);
     }
+
+    public function register()
+    {
+        $input = $this->request->all();
+
+        $validator = Validation::check($input, [
+            [['mobile'], 'required', 'safe', 'filter' => 'validator_mobile'],
+            [['password'], 'string', 'required'],
+        ]);
+
+        if (! $validator->isOk()) {
+            throw new BusinessException(ErrorCode::SERVER_ERROR);
+        }
+
+        $mobile = $validator->get('mobile');
+        $password = $validator->get('password');
+
+        $result = $this->biz->register($mobile, $password);
+
+        return $this->response->success($result);
+    }
+    /**
+     * @return array
+     */
+    public function userInfo()
+    {
+        $userId = $this->request->input('user_id');
+
+        if(empty($userId)) {
+            throw new BusinessException(ErrorCode::USER_NOT_EXIST);
+        }
+
+        $result = $this->biz->userInfo($userId);
+
+        return $this->response->success($result);
+    }
 }

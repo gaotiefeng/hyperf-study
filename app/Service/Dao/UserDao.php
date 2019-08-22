@@ -21,16 +21,32 @@ class UserDao extends Service
 {
     /**
      * @param $userId
+     * @param $throw
      * @return null|User
      */
-    public function first($userId)
+    public function first($userId, bool $throw = false)
     {
         $model = User::query()->find($userId);
 
-        if (empty($model)) {
+        if ($throw && empty($model)) {
             throw new BusinessException(ErrorCode::SERVER_ERROR);
         }
 
         return $model;
+    }
+
+    /**
+     * @param $mobile
+     * @param $password
+     * @return bool
+     */
+    public function register($mobile, $password)
+    {
+        $model = new User();
+
+        $model->mobile = $mobile;
+        $model->password = $password;
+
+        return  $model->save();
     }
 }

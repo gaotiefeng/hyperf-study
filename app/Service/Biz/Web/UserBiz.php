@@ -12,10 +12,12 @@ declare(strict_types=1);
 
 namespace App\Service\Biz\Web;
 
+use App\Constants\Constants;
 use App\Constants\ErrorCode;
 use App\Exception\BusinessException;
 use App\Model\User;
 use App\Service\Dao\UserDao;
+use App\Service\Formatter\UserFormatter;
 use App\Service\Service;
 use Hyperf\Di\Annotation\Inject;
 
@@ -36,5 +38,30 @@ class UserBiz extends Service
         }
 
         return $model;
+    }
+
+    /**
+     * @param $mobile
+     * @param $password
+     * @return bool
+     */
+    public function register($mobile, $password)
+    {
+        $options = Constants::options;
+        $password = password_hash($password, PASSWORD_BCRYPT, $options);
+
+        $result = $this->dao->register($mobile, $password);
+
+        return $result;
+    }
+    /**
+     * @param $userId
+     * @return array
+     */
+    public function userInfo($userId)
+    {
+        $item = $this->dao->first($userId, true);
+
+        return UserFormatter::instance()->base($item);
     }
 }
