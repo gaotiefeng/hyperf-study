@@ -26,6 +26,11 @@ class ErrorCode extends AbstractConstants
     const SERVER_ERROR = 500;
 
     /**
+     * token非法
+     */
+    const NOT_TOKEN = 1000;
+
+    /**
      * 用户名或密码不正确.
      */
     const USER_NOT_EXIST = 100;

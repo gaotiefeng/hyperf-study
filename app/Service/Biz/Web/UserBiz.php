@@ -19,6 +19,7 @@ use App\Model\User;
 use App\Service\Dao\UserDao;
 use App\Service\Formatter\UserFormatter;
 use App\Service\Service;
+use App\Untils\JwtAuth;
 use Hyperf\Di\Annotation\Inject;
 
 class UserBiz extends Service
@@ -37,7 +38,9 @@ class UserBiz extends Service
             throw new BusinessException(ErrorCode::USER_NOT_EXIST);
         }
 
-        return $model;
+        $result['token'] = JwtAuth::instance()->init($model->id)->getToken();
+
+        return $result;
     }
 
     /**

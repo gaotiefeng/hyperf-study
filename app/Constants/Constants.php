@@ -16,6 +16,7 @@ use Hyperf\Constants\AbstractConstants;
 
 class Constants extends AbstractConstants
 {
+    const AUTH_TOKEN = 'api-token';
     const options = [
         'cost' => 11,
     ];

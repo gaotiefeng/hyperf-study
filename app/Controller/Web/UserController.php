@@ -16,6 +16,8 @@ use App\Constants\ErrorCode;
 use App\Controller\Controller;
 use App\Exception\BusinessException;
 use App\Service\Biz\Web\UserBiz;
+use App\Untils\Jwt;
+use App\Untils\JwtAuth;
 use Hyperf\Di\Annotation\Inject;
 use Inhere\Validate\Validation;
 
