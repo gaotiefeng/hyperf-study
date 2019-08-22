@@ -31,9 +31,9 @@ class UserBiz extends Service
 
     public function userLogin($mobile, $password)
     {
-        $model = User::query()->where(['mobile'=>$mobile,'password'=>$password])->first();
+        $model = User::query()->where(['mobile' => $mobile, 'password' => $password])->first();
 
-        if(empty($model)) {
+        if (empty($model)) {
             throw new BusinessException(ErrorCode::USER_NOT_EXIST);
         }
 
@@ -50,10 +50,9 @@ class UserBiz extends Service
         $options = Constants::options;
         $password = password_hash($password, PASSWORD_BCRYPT, $options);
 
-        $result = $this->dao->register($mobile, $password);
-
-        return $result;
+        return $this->dao->register($mobile, $password);
     }
+
     /**
      * @param $userId
      * @return array

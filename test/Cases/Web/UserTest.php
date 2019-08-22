@@ -32,20 +32,20 @@ class UserTest extends HttpTestCase
 
     public function testWebUserRegister()
     {
-        $res = $this->client->post('/user/register',[
+        $res = $this->client->post('/user/register', [
             'mobile' => '15904435098',
             'password' => '123456',
         ]);
 
-        $this->assertSame(0,$res['code']);
+        $this->assertSame(0, $res['code']);
     }
 
     public function testWebUserInfo()
     {
-        $res = $this->client->get('/user/info',[
-           'user_id' => 1
+        $res = $this->client->get('/user/info', [
+            'user_id' => 1,
         ]);
 
-        $this->assertSame(0,$res['code']);
+        $this->assertSame(0, $res['code']);
     }
 }

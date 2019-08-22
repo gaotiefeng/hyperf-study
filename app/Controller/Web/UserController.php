@@ -68,6 +68,7 @@ class UserController extends Controller
 
         return $this->response->success($result);
     }
+
     /**
      * @return array
      */
@@ -75,7 +76,7 @@ class UserController extends Controller
     {
         $userId = $this->request->input('user_id');
 
-        if(empty($userId)) {
+        if (empty($userId)) {
             throw new BusinessException(ErrorCode::USER_NOT_EXIST);
         }
 

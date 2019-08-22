@@ -1,22 +1,27 @@
 <?php
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://doc.hyperf.io
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ */
 
 namespace App\Service\Formatter;
 
-
 use App\Model\User;
-use App\Service\Service;
 
 class UserFormatter extends Formatter
 {
     public function base(User $model)
     {
-        $result = [
+        return [
             'id' => $model->id,
             'mobile' => $model->mobile,
             'password' => $model->password,
         ];
-
-        return  $result;
     }
 }

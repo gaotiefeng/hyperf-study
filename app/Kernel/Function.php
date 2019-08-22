@@ -13,7 +13,6 @@ declare(strict_types=1);
 if (! function_exists('validator_mobile')) {
     /**
      * @param $mobile
-     * @return null
      */
     function validator_mobile($mobile)
     {
