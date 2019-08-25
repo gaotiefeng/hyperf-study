@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 return [
     'http' => [
-        \App\Middleware\UserAuthMiddleware::class
+        \App\Middleware\UserAuthMiddleware::class,
+        \App\Middleware\CorsMiddleware::class,
     ],
 ];

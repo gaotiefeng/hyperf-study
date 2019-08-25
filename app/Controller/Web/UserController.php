@@ -39,7 +39,7 @@ class UserController extends Controller
         ]);
 
         if (! $validator->isOk()) {
-            throw new BusinessException(ErrorCode::SERVER_ERROR);
+            throw new BusinessException(ErrorCode::SERVER_ERROR, $validator->firstError());
         }
 
         $mobile = $validator->get('mobile');
