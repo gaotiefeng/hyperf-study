@@ -38,8 +38,7 @@ class UserBiz extends Service
             throw new BusinessException(ErrorCode::USER_NOT_EXIST);
         }
 
-        if(!password_verify($password,$model->password))
-        {
+        if (! password_verify($password, $model->password)) {
             throw new BusinessException(ErrorCode::USER_PASSWORD_ERROR);
         }
 

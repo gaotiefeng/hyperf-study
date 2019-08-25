@@ -41,13 +41,14 @@ class UserDao extends Service
      */
     public function mobile($mobile)
     {
-        $model = User::query()->where('mobile','=',$mobile)->first();
+        $model = User::query()->where('mobile', '=', $mobile)->first();
 
-        if(!empty($model)) {
+        if (! empty($model)) {
             throw new BusinessException(ErrorCode::USER_EXIST);
         }
         return $model;
     }
+
     /**
      * @param $mobile
      * @param $password

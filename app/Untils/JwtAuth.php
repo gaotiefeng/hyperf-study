@@ -1,8 +1,16 @@
 <?php
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://doc.hyperf.io
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ */
 
 namespace App\Untils;
-
 
 use App\Constants\ErrorCode;
 use App\Exception\BusinessException;
@@ -67,26 +75,26 @@ class JwtAuth
     public function getToken()
     {
         $time = time();
-        $params = array(
-            "iss" => "article",
-            "aud" => "user",
-            "iat" => $time,
-            "nbf" => $time,
-            "exp" => $time + 7200,
-            "data" => [
-                "user_id" => $this->build()->getUserId(),
-            ]
-        );
+        $params = [
+            'iss' => 'article',
+            'aud' => 'user',
+            'iat' => $time,
+            'nbf' => $time,
+            'exp' => $time + 7200,
+            'data' => [
+                'user_id' => $this->build()->getUserId(),
+            ],
+        ];
 
         return JWT::encode($params, $this->key);
     }
 
-    public function checkToken(string $token) : int
+    public function checkToken(string $token): int
     {
-        try{
-            $decoded = JWT::decode($token, $this->key, array('HS256'));
+        try {
+            $decoded = JWT::decode($token, $this->key, ['HS256']);
             return $decoded->data->user_id;
-        }catch (\Throwable $exception){
+        } catch (\Throwable $exception) {
             $this->logger->warning('Decode token failed. Message = ' . $exception->getMessage());
         }
 

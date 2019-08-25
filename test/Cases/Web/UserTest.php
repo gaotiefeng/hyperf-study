@@ -22,7 +22,6 @@ use HyperfTest\HttpTestCase;
  */
 class UserTest extends HttpTestCase
 {
-
     public function testWebUserLogin()
     {
         $res = $this->client->json('/user/login', [
@@ -32,7 +31,6 @@ class UserTest extends HttpTestCase
 
         $this->assertSame(0, $res['code']);
     }
-
 
     public function testWebUserRegister()
     {

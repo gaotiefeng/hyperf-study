@@ -54,4 +54,16 @@ if (! function_exists('validator_mobile')) {
             return substr_replace($mobile, $replacement, $start, $length);
         }
     }
+    if (! function_exists('format_throwable')) {
+        /**
+         * Format a throwable to string.
+         * @param Throwable $throwable
+         * @return string
+         */
+        function format_throwable(Throwable $throwable): string
+        {
+            return di()->get(\Hyperf\ExceptionHandler\Formatter\FormatterInterface::class)->format($throwable);
+        }
+    }
+
 }
