@@ -21,6 +21,11 @@ use Hyperf\Constants\Annotation\Constants;
 class ErrorCode extends AbstractConstants
 {
     /**
+         * @Message("Token Error！")
+     */
+    const TOKEN_NOT_EXITS = 700;
+
+    /**
      * @Message("Server Error！")
      */
     const SERVER_ERROR = 500;

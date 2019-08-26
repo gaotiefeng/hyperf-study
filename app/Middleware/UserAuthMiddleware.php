@@ -13,6 +13,8 @@ declare(strict_types=1);
 namespace App\Middleware;
 
 use App\Constants\Constants;
+use App\Constants\ErrorCode;
+use App\Exception\BusinessException;
 use App\Untils\JwtAuth;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -32,6 +34,7 @@ class UserAuthMiddleware implements MiddlewareInterface
         $auth = JwtAuth::instance()->reload($token);
 
         if (! $auth->check()) {
+            throw new BusinessException(ErrorCode::TOKEN_NOT_EXITS);
             $auth->init(1);
         }
 

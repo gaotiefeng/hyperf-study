@@ -38,6 +38,7 @@ class AppExceptionHandler extends ExceptionHandler
      * @var Response
      */
     protected $response;
+
     public function __construct(ContainerInterface $container,StdoutLoggerInterface $logger)
     {
         $this->container = $container;
