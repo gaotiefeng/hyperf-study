@@ -22,7 +22,7 @@ class JwtAuth
 {
     use StaticInstance;
 
-    protected $key = 'api-token';
+    protected $key = 'Auth-Token';
 
     /**
      * @var int
