@@ -24,7 +24,7 @@ class UserTest extends HttpTestCase
 {
     public function testWebUserLogin()
     {
-        $res = $this->client->json('/user/login', [
+        $res = $this->client->post('/user/login', [
             'mobile' => '15904435047',
             'password' => '123456',
         ]);

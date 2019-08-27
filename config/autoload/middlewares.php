@@ -14,5 +14,6 @@ return [
     'http' => [
         \App\Middleware\UserAuthMiddleware::class,
         \App\Middleware\CorsMiddleware::class,
+        \App\Middleware\DebugMiddleware::class,
     ],
 ];
