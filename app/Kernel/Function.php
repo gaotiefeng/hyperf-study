@@ -10,6 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
 
+use Hyperf\ExceptionHandler\Formatter\FormatterInterface;
 use Hyperf\Utils\ApplicationContext;
 
 if (! function_exists('di')) {
@@ -62,8 +63,7 @@ if (! function_exists('validator_mobile')) {
          */
         function format_throwable(Throwable $throwable): string
         {
-            return di()->get(\Hyperf\ExceptionHandler\Formatter\FormatterInterface::class)->format($throwable);
+            return di()->get(FormatterInterface::class)->format($throwable);
         }
     }
-
 }

@@ -17,7 +17,6 @@ use App\Exception\BusinessException;
 use App\Kernel\Http\Response;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandler;
-use Hyperf\HttpMessage\Stream\SwooleStream;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
@@ -39,19 +38,19 @@ class AppExceptionHandler extends ExceptionHandler
      */
     protected $response;
 
-    public function __construct(ContainerInterface $container,StdoutLoggerInterface $logger)
+    public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-        $this->logger = $logger;
+        $this->logger = $container->get(StdoutLoggerInterface::class);
         $this->response = $this->container->get(Response::class);
     }
 
     public function handle(Throwable $throwable, ResponseInterface $response)
     {
-        if($throwable instanceof BusinessException) {
+        if ($throwable instanceof BusinessException) {
             $this->logger->warning(format_throwable($throwable));
 
-            return $this->response->fail($throwable->getCode(),$throwable->getMessage());
+            return $this->response->fail($throwable->getCode(), $throwable->getMessage());
         }
         $this->logger->error(format_throwable($throwable));
 
