@@ -52,9 +52,9 @@ class UserDao extends Service
     /**
      * @param $mobile
      * @param $password
-     * @return bool
+     * @return int
      */
-    public function register($mobile, $password)
+    public function register($mobile, $password): int
     {
         $this->mobile($mobile);
 
@@ -62,7 +62,8 @@ class UserDao extends Service
 
         $model->mobile = $mobile;
         $model->password = $password;
+        $model->save();
 
-        return  $model->save();
+        return  $model->id;
     }
 }

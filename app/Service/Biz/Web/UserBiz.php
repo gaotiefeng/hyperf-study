@@ -50,14 +50,17 @@ class UserBiz extends Service
     /**
      * @param $mobile
      * @param $password
-     * @return bool
+     * @return array
      */
-    public function register($mobile, $password)
+    public function register($mobile, $password):array
     {
         $options = Constants::options;
         $password = password_hash($password, PASSWORD_BCRYPT, $options);
 
-        return $this->dao->register($mobile, $password);
+        $userId = $this->dao->register($mobile, $password);
+        $result['token'] = JwtAuth::instance()->init($userId)->getToken();
+
+        return $result;
     }
 
     /**
