@@ -52,7 +52,7 @@ class UserBiz extends Service
      * @param $password
      * @return array
      */
-    public function register($mobile, $password):array
+    public function register($mobile, $password): array
     {
         $options = Constants::options;
         $password = password_hash($password, PASSWORD_BCRYPT, $options);

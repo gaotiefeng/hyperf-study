@@ -16,22 +16,21 @@ use Hyperf\DbConnection\Model\Model;
 
 /**
  * @property int $id
- * @property string $mobile
- * @property string $password
- * @property string $name
- * @property string $head_url
- * @property string $address
+ * @property string $title
+ * @property string $content
+ * @property int $likes
+ * @property int $page_views
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
-class User extends Model
+class Article extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'user';
+    protected $table = 'article';
 
     /**
      * The connection name for the model.
@@ -45,12 +44,12 @@ class User extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'mobile', 'password', 'name', 'head_url', 'address', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'title', 'content', 'likes', 'page_views', 'created_at', 'updated_at'];
 
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'likes' => 'integer', 'page_views' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }
