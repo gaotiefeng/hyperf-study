@@ -18,6 +18,7 @@ use App\Controller\Controller;
 use App\Exception\BusinessException;
 use App\Service\Biz\Web\UserBiz;
 use App\Untils\JwtAuth;
+use Hyperf\Amqp\Producer;
 use Hyperf\Di\Annotation\Inject;
 use Inhere\Validate\Validation;
 
@@ -84,7 +85,10 @@ class UserController extends Controller
 
         $result = $this->biz->userInfo($userId);
 
-        di()->get(MessageProducer::class)->setPayload($result);
+        $message = new MessageProducer($result);
+        /** @var Producer $producer */
+        $producer = di()->get(Producer::class);
+        $producer->produce($message);
 
         return $this->response->success($result);
     }
