@@ -85,7 +85,7 @@ class UserController extends Controller
 
         $result = $this->biz->userInfo($userId);
 
-        $message = new MessageProducer($result);
+        $message = new MessageProducer();
         /** @var Producer $producer */
         $producer = di()->get(Producer::class);
         $producer->produce($message);
