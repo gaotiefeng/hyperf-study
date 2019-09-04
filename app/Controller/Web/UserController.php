@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Web;
 
+use App\Amqp\Producer\MessageProducer;
 use App\Constants\ErrorCode;
 use App\Controller\Controller;
 use App\Exception\BusinessException;
@@ -82,6 +83,8 @@ class UserController extends Controller
         }
 
         $result = $this->biz->userInfo($userId);
+
+        di()->get(MessageProducer::class)->setPayload($result);
 
         return $this->response->success($result);
     }
