@@ -21,6 +21,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '用户ID',
   `title` varchar(64) NOT NULL DEFAULT '' COMMENT '标题',
   `content` text COMMENT '内容',
   `likes` int(10) NOT NULL DEFAULT '0' COMMENT '点赞数',
@@ -52,6 +53,14 @@ CREATE TABLE `user` (
   UNIQUE KEY `mobile` (`mobile`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 
+
+DROP TABLE IF EXISTS `article_user`;
+CREATE TABLE `article_user` (
+  `id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `article_id` bigint(20) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 -- ----------------------------
 -- Records of user
 -- ----------------------------

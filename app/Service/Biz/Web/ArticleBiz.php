@@ -5,7 +5,9 @@ namespace App\Service\Biz\Web;
 
 
 use App\Model\Article;
+use App\Model\ArticleUser;
 use App\Service\Dao\ArticleDao;
+use App\Service\Dao\ArticleUserDao;
 use App\Service\Formatter\ArticleFormatter;
 use App\Service\Service;
 use Hyperf\Di\Annotation\Inject;
@@ -18,6 +20,11 @@ class ArticleBiz extends Service
      */
     protected $dao;
 
+    /**
+     * @Inject()
+     * @var ArticleUserDao
+     */
+    protected $articleUserDao;
     /**
      * @param array $data
      * @param int $offset
@@ -34,5 +41,12 @@ class ArticleBiz extends Service
         }
 
         return [$count,$result];
+    }
+
+    public function likes($userId, $articleId)
+    {
+        $this->articleUserDao->exist($userId, $articleId);
+
+        return $this->dao->likes($userId, $articleId);
     }
 }

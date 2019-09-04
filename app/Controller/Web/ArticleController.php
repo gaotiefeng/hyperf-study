@@ -8,6 +8,7 @@ use App\Constants\ErrorCode;
 use App\Controller\Controller;
 use App\Exception\BusinessException;
 use App\Service\Biz\Web\ArticleBiz;
+use App\Untils\JwtAuth;
 use Hyperf\Di\Annotation\Inject;
 use Inhere\Validate\Valid;
 use Inhere\Validate\Validation;
@@ -44,5 +45,19 @@ class ArticleController extends Controller
             'count' => $count,
             'items' => $items
         ]);
+    }
+
+    public function likes()
+    {
+        $articleId = $this->request->input('article_id');
+
+        if(empty($articleId)) {
+            throw new BusinessException(ErrorCode::ARTICLE_NO_EXIST);
+        }
+        $userId = JwtAuth::instance()->build()->getUserId();
+
+        $result = $this->biz->likes($userId,$articleId);
+
+        return $this->response->success($result);
     }
 }

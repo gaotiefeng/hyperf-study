@@ -38,7 +38,7 @@ class ErrorCode extends AbstractConstants
     /**
      * @Message("用户名不存在")
      */
-    const USER_NOT_EXIST = 1002;
+    const USER_NOT_EXIST = 1404;
 
     /**
      * @Message("用户密码错误")
@@ -49,4 +49,19 @@ class ErrorCode extends AbstractConstants
      * @Message("用户已经存在")
      */
     const USER_EXIST = 1001;
+
+    /**
+     * @Message("文章不存在")
+     */
+    const ARTICLE_NO_EXIST = 2404;
+
+    /**
+     * @Message("文章已存在")
+     */
+    const ARTICLE_EXIST = 2301;
+
+    /**
+     * @Message("您已经点赞")
+     */
+    const ARTICLE_USER_EXIST = 2500;
 }

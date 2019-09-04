@@ -19,6 +19,7 @@ Router::post('/user/register', 'App\Controller\Web\UserController::register');
 Router::get('/user/info', 'App\Controller\Web\UserController::userInfo');
 
 Router::get('/article/list', 'App\Controller\Web\ArticleController::list');
+Router::post('/article/likes', 'App\Controller\Web\ArticleController::likes');
 
 /*sudo docker run -d --hostname www.tfuu.cn \
 --publish 443:443 --publish 8880:80 --publish 22:22 \
