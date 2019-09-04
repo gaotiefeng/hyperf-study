@@ -12,9 +12,10 @@ use Hyperf\Amqp\Message\ProducerMessage;
  */
 class MessageProducer extends ProducerMessage
 {
-    public function __construct($data = 'hello amqp')
+    public function __construct($data)
     {
-        $this->payload = $data;
+        $result = json_encode($data);
+        $this->payload = $result;
     }
 
 }
