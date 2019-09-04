@@ -40,7 +40,8 @@
         "hyperf/model-cache": "~1.0.0",
         "hyperf/elasticsearch": "~1.0.0",
         "inhere/php-validate": "^2.7",
-        "firebase/php-jwt": "^5.0"
+        "firebase/php-jwt": "^5.0",
+        "hyperf/amqp": "^1.0"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",
