@@ -64,4 +64,9 @@ class ErrorCode extends AbstractConstants
      * @Message("您已经点赞")
      */
     const ARTICLE_USER_EXIST = 2500;
+
+    /**
+     * @Message("验证码错误")
+     */
+    const CAPTCHA_NO_EXIST = 3500;
 }
