@@ -42,7 +42,8 @@
         "inhere/php-validate": "^2.7",
         "firebase/php-jwt": "^5.0",
         "hyperf/amqp": "^1.0",
-        "hyperf/websocket-server": "^1.0"
+        "hyperf/websocket-server": "^1.0",
+        "overtrue/easy-sms": "^1.1"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",
