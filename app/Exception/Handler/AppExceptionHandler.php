@@ -52,6 +52,7 @@ class AppExceptionHandler extends ExceptionHandler
 
             return $this->response->fail($throwable->getCode(), $throwable->getMessage());
         }
+
         $this->logger->error(format_throwable($throwable));
 
         return $this->response->fail(ErrorCode::SERVER_ERROR, 'Server Error');

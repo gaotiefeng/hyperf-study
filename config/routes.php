@@ -17,3 +17,7 @@ include __DIR__ . '/routes/web.php';
 Router::addServer('admin', function () {
     require __DIR__ . '/routes/admin.php';
 });
+
+Router::addServer('ws', function () {
+    Router::get('/', 'App\Controller\Ws\WebSocketController');
+});

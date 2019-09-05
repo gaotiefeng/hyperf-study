@@ -1,6 +1,14 @@
 <?php
 
 declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://doc.hyperf.io
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ */
 
 namespace App\Controller\Web;
 
@@ -10,28 +18,27 @@ use App\Exception\BusinessException;
 use App\Service\Biz\Web\ArticleBiz;
 use App\Untils\JwtAuth;
 use Hyperf\Di\Annotation\Inject;
-use Inhere\Validate\Valid;
 use Inhere\Validate\Validation;
 
 class ArticleController extends Controller
 {
     /**
-     * @Inject()
+     * @Inject
      * @var ArticleBiz
      */
     protected $biz;
 
     /**
-     * 列表
+     * 列表.
      * @return array
      */
     public function list()
     {
         $input = $this->request->all();
         $validator = Validation::check($input, [
-            [['offset','limit'], 'required', 'filter' => 'integer'],
+            [['offset', 'limit'], 'required', 'filter' => 'integer'],
         ]);
-        if(! $validator->isOk()) {
+        if (! $validator->isOk()) {
             throw new BusinessException(ErrorCode::SERVER_ERROR, $validator->firstError());
         }
         $data = $validator->getSafeData();
@@ -43,7 +50,7 @@ class ArticleController extends Controller
 
         return $this->response->success([
             'count' => $count,
-            'items' => $items
+            'items' => $items,
         ]);
     }
 
@@ -51,12 +58,12 @@ class ArticleController extends Controller
     {
         $articleId = $this->request->input('article_id');
 
-        if(empty($articleId)) {
+        if (empty($articleId)) {
             throw new BusinessException(ErrorCode::ARTICLE_NO_EXIST);
         }
         $userId = JwtAuth::instance()->build()->getUserId();
 
-        $result = $this->biz->likes($userId,$articleId);
+        $result = $this->biz->likes($userId, $articleId);
 
         return $this->response->success($result);
     }

@@ -1,11 +1,17 @@
 <?php
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://doc.hyperf.io
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ */
 
 namespace App\Service\Biz\Web;
 
-
-use App\Model\Article;
-use App\Model\ArticleUser;
 use App\Service\Dao\ArticleDao;
 use App\Service\Dao\ArticleUserDao;
 use App\Service\Formatter\ArticleFormatter;
@@ -15,16 +21,17 @@ use Hyperf\Di\Annotation\Inject;
 class ArticleBiz extends Service
 {
     /**
-     * @Inject()
+     * @Inject
      * @var ArticleDao
      */
     protected $dao;
 
     /**
-     * @Inject()
+     * @Inject
      * @var ArticleUserDao
      */
     protected $articleUserDao;
+
     /**
      * @param array $data
      * @param int $offset
@@ -36,11 +43,11 @@ class ArticleBiz extends Service
         [$count,$items] = $this->dao->index($data, $offset, $limit);
 
         $result = [];
-        foreach ($items as $key => $val){
+        foreach ($items as $key => $val) {
             $result[] = ArticleFormatter::instance()->base($val);
         }
 
-        return [$count,$result];
+        return [$count, $result];
     }
 
     public function likes($userId, $articleId)

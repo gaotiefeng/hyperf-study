@@ -1,8 +1,16 @@
 <?php
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://doc.hyperf.io
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ */
 
 namespace App\Service\Dao;
-
 
 use App\Constants\ErrorCode;
 use App\Exception\BusinessException;
@@ -18,24 +26,25 @@ class ArticleDao extends Service
     {
         $model = Article::query()->find($articleId);
 
-        if($throw && !empty($model)) {
+        if ($throw && ! empty($model)) {
             throw new BusinessException(ErrorCode::ARTICLE_NO_EXIST);
         }
 
         return $model;
     }
+
     /**
      * @param array $data
      * @param int $offset
      * @param int $limit
-     * @return ModelHelper[]|\Hyperf\Database\Model\Collection
+     * @return \Hyperf\Database\Model\Collection|ModelHelper[]
      */
     public function index(array $data, $offset = 0, $limit = 10)
     {
         $query = Article::query();
 
-        if($title = $data['title'] ?? null) {
-            $query->where('title','like',$title);
+        if ($title = $data['title'] ?? null) {
+            $query->where('title', 'like', $title);
         }
 
         return ModelHelper::pagination($query, $offset, $limit);
@@ -44,9 +53,9 @@ class ArticleDao extends Service
     public function likes($userId, $articleId)
     {
         Db::beginTransaction();
-        try{
+        try {
             /** @var Article $model */
-            $model = $this->first($articleId,true);
+            $model = $this->first($articleId, true);
             $model = $model->likes + 1;
             $model->save();
 
@@ -56,7 +65,7 @@ class ArticleDao extends Service
             $articleUser->save();
 
             Db::commit();
-        }catch (\Throwable $e){
+        } catch (\Throwable $e) {
             Db::rollBack();
             return false;
         }
