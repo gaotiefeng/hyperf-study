@@ -32,7 +32,7 @@ class UserAuthMiddleware implements MiddlewareInterface
         $auth = JwtAuth::instance()->reload($token);
 
         if (! $auth->check()) {
-            $auth->init(1);
+            //$auth->init(1);
         }
 
         return  $handler->handle($request);

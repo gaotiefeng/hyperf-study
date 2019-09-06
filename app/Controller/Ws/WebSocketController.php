@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Ws;
 
+use App\Untils\JwtAuth;
 use Hyperf\Contract\OnCloseInterface;
 use Hyperf\Contract\OnMessageInterface;
 use Hyperf\Contract\OnOpenInterface;
