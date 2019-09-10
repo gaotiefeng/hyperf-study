@@ -25,6 +25,7 @@ class WebSocketController implements OnMessageInterface, OnOpenInterface, OnClos
     public function onMessage(Server $server, Frame $frame): void
     {
         $server->push($frame->fd, 'Recv: ' . $frame->data);
+//        {"protocal":"send.message","data":{"id":2,"message":"Hello World."}}
     }
 
     public function onClose(Server $server, int $fd, int $reactorId): void
