@@ -1,9 +1,16 @@
 <?php
 
 declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://doc.hyperf.io
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ */
 
 namespace App\Controller\Web;
-
 
 use App\Constants\ErrorCode;
 use App\Controller\Controller;
@@ -16,7 +23,7 @@ use Hyperf\Di\Annotation\Inject;
 class SmsController extends Controller
 {
     /**
-     * @Inject()
+     * @Inject
      * @var Captcha
      */
     protected $captcha;
@@ -25,13 +32,13 @@ class SmsController extends Controller
     {
         $captchaCode = $this->request->input('code');
         $mobile = $this->request->input('mobile');
-        $code = rand(100000,999999);
+        $code = rand(100000, 999999);
 
-        if(! $this->captcha->check($captchaCode,$code)) {
+        if (! $this->captcha->check($captchaCode, $code)) {
             throw new BusinessException(ErrorCode::CAPTCHA_NO_EXIST);
         }
 
-        di()->get(SmsRedis::class)->set($mobile,$code);
+        di()->get(SmsRedis::class)->set($mobile, $code);
 
         //queue_push(new SmsJob($mobile,$code),200);
 

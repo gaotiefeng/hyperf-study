@@ -38,13 +38,14 @@
         "hyperf/constants": "~1.0.0",
         "hyperf/async-queue": "~1.0.0",
         "hyperf/model-cache": "~1.0.0",
-        "hyperf/elasticsearch": "~1.0.0",
+        "hyperf/elasticsearch": "^1.0",
         "inhere/php-validate": "^2.7",
         "firebase/php-jwt": "^5.0",
         "hyperf/amqp": "^1.0",
         "hyperf/websocket-server": "^1.0",
         "overtrue/easy-sms": "^1.1",
-        "gregwar/captcha": "^1.1"
+        "gregwar/captcha": "^1.1",
+        "hyperf/rate-limit": "^1.0"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",

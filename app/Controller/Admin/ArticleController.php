@@ -1,6 +1,14 @@
 <?php
 
 declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://doc.hyperf.io
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ */
 
 namespace App\Controller\Admin;
 
@@ -14,7 +22,7 @@ use Inhere\Validate\Validation;
 class ArticleController extends Controller
 {
     /**
-     * @Inject()
+     * @Inject
      * @var ArticleBiz
      */
     protected $biz;
@@ -23,11 +31,11 @@ class ArticleController extends Controller
     {
         $input = $this->request->all();
 
-        $validation = Validation::check($input,[
-            [['offset','limit'], 'required', 'filter'=>'integer'],
+        $validation = Validation::check($input, [
+            [['offset', 'limit'], 'required', 'filter' => 'integer'],
         ]);
 
-        if(!$validation->isOk()) {
+        if (! $validation->isOk()) {
             throw new BusinessException(ErrorCode::SERVER_ERROR);
         }
         $data = $validation->getSafeData();

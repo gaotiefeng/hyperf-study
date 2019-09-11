@@ -1,5 +1,14 @@
 <?php
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://doc.hyperf.io
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ */
 
 namespace App\Untils;
 
@@ -11,7 +20,7 @@ use Hyperf\Redis\Redis;
 class Captcha
 {
     /**
-     * @Inject()
+     * @Inject
      * @var Redis
      */
     protected $redis;
@@ -35,24 +44,24 @@ class Captcha
         $build->build($width, $height);
         $captcha = $build->getPhrase();
 
-        $this->redis->set($this->captcha.$code, $captcha, 60);
+        $this->redis->set($this->captcha . $code, $captcha, 60);
 
         return $build;
     }
 
     public function set($code)
     {
-        $this->redis->set($this->captcha.$code, $code, 120);
+        $this->redis->set($this->captcha . $code, $code, 120);
     }
 
     public function check($code, $cap)
     {
-        if(empty($cap)) {
+        if (empty($cap)) {
             return false;
         }
-        $redisCaptcha = $this->redis->get($this->captcha.$code);
+        $redisCaptcha = $this->redis->get($this->captcha . $code);
 
-        if($redisCaptcha != $cap) {
+        if ($redisCaptcha != $cap) {
             return false;
         }
 
