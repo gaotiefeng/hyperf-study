@@ -14,3 +14,5 @@ use Hyperf\HttpServer\Router\Router;
 
 Router::get('/', 'App\Controller\IndexController::index');
 Router::post('/', 'App\Controller\Admin\UserController::index');
+
+Router::get('/article/index', 'App\Controller\Admin\ArticleController::index');
