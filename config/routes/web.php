@@ -24,10 +24,5 @@ Router::get('/captcha/image', 'App\Controller\Web\CaptchaController::image');
 
 Router::get('/article/list', 'App\Controller\Web\ArticleController::list');
 Router::post('/article/likes', 'App\Controller\Web\ArticleController::likes');
+Router::post('/article/save', 'App\Controller\Web\ArticleController::save');
 
-/*sudo docker run -d --hostname www.tfuu.cn \
---publish 443:443 --publish 8880:80 --publish 22:22 \
---name gitlab --restart always --volume /srv/gitlab/config:/etc/gitlab \
---volume /srv/gitlab/logs:/var/log/gitlab \
---volume /srv/gitlab/data:/var/opt/gitlab \
-gitlab/gitlab-ce:latest*/

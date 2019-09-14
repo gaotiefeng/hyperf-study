@@ -54,6 +54,9 @@ class ArticleController extends Controller
         ]);
     }
 
+    /**
+     *点赞
+     */
     public function likes()
     {
         $articleId = $this->request->input('article_id');
@@ -64,6 +67,29 @@ class ArticleController extends Controller
         $userId = JwtAuth::instance()->build()->getUserId();
 
         $result = $this->biz->likes($userId, $articleId);
+
+        return $this->response->success($result);
+    }
+
+    /**
+     * 添加文章
+     * @param [ 'title'=> , 'content' => ]
+     * @return array
+     * [ 'code' => 0 , 'data' => true ]
+     */
+    public function save()
+    {
+        $input = $this->request->all();
+
+        $userId = JwtAuth::instance()->build()->getUserId();
+
+        $validation = Validation::check($input,[
+            [['title','content'], 'required']
+        ]);
+
+        $data = $validation->safeData();
+
+        $result = $this->biz->save($userId, $data);
 
         return $this->response->success($result);
     }

@@ -50,10 +50,25 @@ class ArticleBiz extends Service
         return [$count, $result];
     }
 
+    /**
+     * @param $userId
+     * @param $articleId
+     * @return bool
+     */
     public function likes($userId, $articleId)
     {
         $this->articleUserDao->exist($userId, $articleId);
 
         return $this->dao->likes($userId, $articleId);
+    }
+
+    /**
+     * @param int $userId
+     * @param array $data
+     * @return bool
+     */
+    public function save(int $userId, array $data)
+    {
+        return $this->dao->save($userId, $data);
     }
 }
