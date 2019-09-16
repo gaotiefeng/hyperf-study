@@ -39,4 +39,14 @@ class ArticleTest extends HttpTestCase
 
         $this->assertSame(0, $res['code']);
     }
+
+    public function testWebArticleSave()
+    {
+        $res = $this->client->post('/article/save',[
+            'title'=> '你知道这五年我怎么过的吗',
+            'content' => '你选的吗',
+        ]);
+
+        $this->assertSame(0, $res['code']);
+    }
 }

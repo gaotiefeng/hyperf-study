@@ -22,6 +22,11 @@ use Hyperf\DbConnection\Db;
 
 class ArticleDao extends Service
 {
+    /**
+     * @param int $articleId
+     * @param bool $throw
+     * @return Model|null
+     */
     public function first(int $articleId, bool $throw = false)
     {
         $model = Article::query()->find($articleId);
@@ -50,6 +55,11 @@ class ArticleDao extends Service
         return ModelHelper::pagination($query, $offset, $limit);
     }
 
+    /**
+     * @param $userId
+     * @param $articleId
+     * @return bool
+     */
     public function likes($userId, $articleId)
     {
         Db::beginTransaction();
@@ -70,5 +80,20 @@ class ArticleDao extends Service
             return false;
         }
         return true;
+    }
+
+    /**
+     * @param int $userId
+     * @param array $data
+     * @return bool
+     */
+    public function save(int $userId, array $data)
+    {
+        $article = new Article();
+        $article->title = $data['title'];
+        $article->content = $data['content'];
+        $article->user_id = $userId;
+
+        return $article->save();
     }
 }
