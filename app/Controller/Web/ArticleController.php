@@ -80,8 +80,6 @@ class ArticleController extends Controller
      */
     public function save()
     {
-        di()->get(ElasticSearch::class)->create();
-
         $input = $this->request->all();
 
         $userId = JwtAuth::instance()->build()->getUserId();

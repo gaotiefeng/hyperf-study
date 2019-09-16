@@ -11,8 +11,9 @@ use Swoole\Coroutine;
 
 class ElasticSearch extends Service
 {
-    public function create()
+    public function create(int $articleId, $title)
     {
+        var_dump($articleId);
         $build = ClientBuilder::create();
 
         if(Coroutine::getCid() > 0) {
@@ -25,28 +26,16 @@ class ElasticSearch extends Service
         }
         $client = $build->setHosts(['http://139.9.164.21:9200'])->build();
         $params = [
-            'id' => 3,
+            'id' => $articleId,
             'index' => 'hyperf',
             'type' => 'article',
-            'body' => [ 'id'=> 1, 'title' => 'title']
+            'body' => [ 'id'=> $articleId, 'title' => $title]
         ];
         $client->create($params);
     }
 
-    public function info()
+    public function search()
     {
-        $build = ClientBuilder::create();
 
-        if(Coroutine::getCid() > 0) {
-            $handler = make(CoroutineHandler::class,[
-                'option' => [
-                    'max_connections' => 50,
-                ],
-            ]);
-            $build->setHandler($handler);
-        }
-        $client = $build->setHosts(['http://139.9.164.21:9200'])->build();
-
-        $client->info();
     }
 }

@@ -17,6 +17,7 @@ use App\Exception\BusinessException;
 use App\Kernel\Helper\ModelHelper;
 use App\Model\Article;
 use App\Model\ArticleUser;
+use App\Service\Search\ElasticSearch;
 use App\Service\Service;
 use Hyperf\DbConnection\Db;
 
@@ -93,7 +94,10 @@ class ArticleDao extends Service
         $article->title = $data['title'];
         $article->content = $data['content'];
         $article->user_id = $userId;
+        $article->save();
 
-        return $article->save();
+        di()->get(ElasticSearch::class)->create($article->id,$article->title);
+
+        return $article->id;
     }
 }
