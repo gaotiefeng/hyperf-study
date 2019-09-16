@@ -44,4 +44,9 @@ class ArticleController extends Controller
 
         return $this->response->success($result);
     }
+
+    public function info()
+    {
+        $id = $this->request->input('id');
+    }
 }
