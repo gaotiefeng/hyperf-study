@@ -16,6 +16,7 @@ use App\Constants\ErrorCode;
 use App\Controller\Controller;
 use App\Exception\BusinessException;
 use App\Service\Biz\Web\ArticleBiz;
+use App\Service\Search\ElasticSearch;
 use App\Untils\JwtAuth;
 use Hyperf\Di\Annotation\Inject;
 use Inhere\Validate\Validation;
@@ -79,6 +80,8 @@ class ArticleController extends Controller
      */
     public function save()
     {
+        di()->get(ElasticSearch::class)->create();
+
         $input = $this->request->all();
 
         $userId = JwtAuth::instance()->build()->getUserId();
