@@ -86,7 +86,7 @@ class ArticleDao extends Service
     /**
      * @param int $userId
      * @param array $data
-     * @return bool
+     * @return Article
      */
     public function save(int $userId, array $data)
     {
@@ -96,8 +96,6 @@ class ArticleDao extends Service
         $article->user_id = $userId;
         $article->save();
 
-        di()->get(ElasticSearch::class)->create($article->id,$article->title);
-
-        return $article->id;
+        return $article;
     }
 }

@@ -15,6 +15,7 @@ namespace App\Service\Biz\Web;
 use App\Service\Dao\ArticleDao;
 use App\Service\Dao\ArticleUserDao;
 use App\Service\Formatter\ArticleFormatter;
+use App\Service\Search\ElasticSearch;
 use App\Service\Service;
 use Hyperf\Di\Annotation\Inject;
 
@@ -69,6 +70,10 @@ class ArticleBiz extends Service
      */
     public function save(int $userId, array $data)
     {
-        return $this->dao->save($userId, $data);
+        $model = $this->dao->save($userId, $data);
+
+        di()->get(ElasticSearch::class)->create($model->id,$model->title);
+
+        return $model;
     }
 }
