@@ -46,7 +46,8 @@
         "overtrue/easy-sms": "^1.1",
         "gregwar/captcha": "^1.1",
         "hyperf/rate-limit": "^1.0",
-        "hyperf/crontab": "^1.0"
+        "hyperf/crontab": "^1.0",
+        "hyperf/snowflake": "^1.0"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",

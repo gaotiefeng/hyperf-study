@@ -20,6 +20,7 @@ use App\Model\ArticleUser;
 use App\Service\Search\ElasticSearch;
 use App\Service\Service;
 use Hyperf\DbConnection\Db;
+use Hyperf\Snowflake\IdGeneratorInterface;
 
 class ArticleDao extends Service
 {
@@ -91,6 +92,7 @@ class ArticleDao extends Service
     public function save(int $userId, array $data)
     {
         $article = new Article();
+        $article->id = di()->get(IdGeneratorInterface::class)->generate();
         $article->title = $data['title'];
         $article->content = $data['content'];
         $article->user_id = $userId;
