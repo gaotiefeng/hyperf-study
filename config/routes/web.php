@@ -26,6 +26,7 @@ Router::get('/article/list', 'App\Controller\Web\ArticleController::list');
 Router::post('/article/likes', 'App\Controller\Web\ArticleController::likes');
 Router::post('/article/save', 'App\Controller\Web\ArticleController::save');
 
-Router::get('/article/test', 'App\Controller\Web\ArticleController::test');
+Router::get('/article/test', 'App\Controller\Web\ArticleController::test');//限流器
+Router::get('/article/circuitTest', 'App\Controller\Web\ArticleController::circuitTest');//熔断
 
 

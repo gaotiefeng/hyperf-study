@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace App\Service\Biz\Web;
 
+use App\Model\Article;
 use App\Service\Dao\ArticleDao;
 use App\Service\Dao\ArticleUserDao;
 use App\Service\Formatter\ArticleFormatter;
@@ -66,10 +67,11 @@ class ArticleBiz extends Service
     /**
      * @param int $userId
      * @param array $data
-     * @return bool
+     * @return Article
      */
     public function save(int $userId, array $data)
     {
+        /** @var Article $model */
         $model = $this->dao->save($userId, $data);
 
         di()->get(ElasticSearch::class)->create($model->id,$model->title);

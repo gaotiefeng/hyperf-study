@@ -18,6 +18,7 @@ use App\Exception\BusinessException;
 use App\Service\Biz\Web\ArticleBiz;
 use App\Service\Search\ElasticSearch;
 use App\Untils\JwtAuth;
+use Hyperf\CircuitBreaker\Annotation\CircuitBreaker;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Di\Aop\ProceedingJoinPoint;
 use Hyperf\HttpServer\Annotation\RequestMapping;
@@ -116,7 +117,10 @@ class ArticleController extends Controller
         $data = [
             'title'=> '北洋水师因何灰飞烟灭',
             'content' => '
-据新华社9月2日报道，历经两个月的水下考古调查，基本确认了北洋水师旗舰定远舰的沉没位置，并出水一批沉舰遗物。北洋水师自1888年组建后，迅速成为号称“亚洲第一”的海上军事力量。然而，仅仅成军不到7年，这支海军便在甲午海战中遭遇全军覆灭的命运，其境遇与本届篮球世界杯刚刚遭遇重大打击的中国男篮颇有相似之处。那么北洋水师因何辉煌过后迅速陨落，真实的定远舰又在甲午战争中发挥了多大作用，本期《出鞘》我们就来回顾这段历史',
+据新华社9月2日报道，历经两个月的水下考古调查，基本确认了北洋水师旗舰定远舰的沉没位置，并出水一批沉舰遗物。
+北洋水师自1888年组建后，迅速成为号称“亚洲第一”的海上军事力量。然而，仅仅成军不到7年，这支海军便在甲午海战中遭遇全军覆灭的命运，
+其境遇与本届篮球世界杯刚刚遭遇重大打击的中国男篮颇有相似之处。那么北洋水师因何辉煌过后迅速陨落，真实的定远舰又在甲午战争中发挥了多大作用，
+本期《出鞘》我们就来回顾这段历史',
         ];
 
         $this->biz->save($userId,$data);
@@ -129,5 +133,26 @@ class ArticleController extends Controller
         // $proceedingJoinPoint 此次请求执行的切入点
         // 可以通过调用 `$proceedingJoinPoint->process()` 继续执行或者自行处理
         //return $proceedingJoinPoint->process();
+    }
+
+    /**
+     * @CircuitBreaker(timeout="0.05", failCounter=1, successCounter=1, fallback="App\Controller\Web\Article::circuitFallback")
+     */
+    public function circuitTest()
+    {
+        $userId = 1;
+        $data = [
+            'title'=> '希望你继续做好红色基因的传承人',
+            'content' => '习近平总书记16日下午在鄂豫皖苏区首府革命博物馆同当地红军后代、烈士家属代表交谈，红军后代黄德耀激动地紧紧握住总书记的手，
+            介绍了自己的革命家史。
+            他的外祖母晏春山被捕后受尽了酷刑，最后高呼“中国共产党万岁”，纵身跳下了悬崖，被誉为大别山的“江姐”。'
+        ];
+
+        $this->biz->save($userId,$data);
+    }
+
+    public function circuitFallback()
+    {
+        return ['circuit'];
     }
 }
