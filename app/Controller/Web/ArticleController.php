@@ -19,8 +19,15 @@ use App\Service\Biz\Web\ArticleBiz;
 use App\Service\Search\ElasticSearch;
 use App\Untils\JwtAuth;
 use Hyperf\Di\Annotation\Inject;
+use Hyperf\Di\Aop\ProceedingJoinPoint;
+use Hyperf\HttpServer\Annotation\RequestMapping;
+use Hyperf\RateLimit\Annotation\RateLimit;
 use Inhere\Validate\Validation;
 
+/**
+ * @\Hyperf\HttpServer\Annotation\Controller(prefix="rate-limit")
+ * @RateLimit(limitCallback={ArticleController::class, "limitCallback"})
+ */
 class ArticleController extends Controller
 {
     /**
@@ -99,6 +106,10 @@ class ArticleController extends Controller
         return $this->response->success($result);
     }
 
+    /**
+     * @RequestMapping(path="test")
+     * @RateLimit(create=2, capacity=4)
+     */
     public function test()
     {
         $userId = 1;
@@ -109,5 +120,14 @@ class ArticleController extends Controller
         ];
 
         $this->biz->save($userId,$data);
+    }
+
+    public static function limitCallback(float $seconds, ProceedingJoinPoint $proceedingJoinPoint)
+    {
+        return true;
+        // $seconds 下次生成Token 的间隔, 单位为秒
+        // $proceedingJoinPoint 此次请求执行的切入点
+        // 可以通过调用 `$proceedingJoinPoint->process()` 继续执行或者自行处理
+        //return $proceedingJoinPoint->process();
     }
 }
