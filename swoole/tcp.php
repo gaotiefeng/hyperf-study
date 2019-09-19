@@ -2,6 +2,16 @@
 
 $serv = new Swoole\Server("127.0.0.1",'9511');
 
+//$serv->set(array(
+//    'open_length_check' => true,
+//    'package_max_length' => 81920,
+//    'package_length_type' => 'n', //see php pack()
+//    'package_length_offset' => 0,
+//    'package_body_offset' => 2,
+//    'open_eof_split' => true,
+//    'package_eof' => "\r\n",
+//));
+
 $serv->set(array('task_worker_num'=> 4));
 
 $serv->on('Connect',function ($serv,$fd){
