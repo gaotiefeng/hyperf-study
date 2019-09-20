@@ -1,5 +1,5 @@
 <?php
-//创建udp  监听9522端口 类型SWOOLE_SOCK_UDP
+//创建udp  监听9512端口 类型SWOOLE_SOCK_UDP
 
 $serv = new Swoole\Server("127.0.0.1",9512,SWOOLE_PROCESS,SWOOLE_SOCK_UDP);
 
@@ -12,4 +12,4 @@ $serv->on("Packet",function($serv,$data,$clientInfo){
 $serv->start();
 
 
-//netcat -u 127.0.0.1 9522
+//netcat -u 127.0.0.1 9512   //nc

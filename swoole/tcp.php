@@ -1,5 +1,6 @@
 <?php
-
+$host = '127.0.0.1';
+$port = '9512';
 $serv = new Swoole\Server("127.0.0.1",'9511');
 
 //$serv->set(array(
@@ -11,11 +12,20 @@ $serv = new Swoole\Server("127.0.0.1",'9511');
 //    'open_eof_split' => true,
 //    'package_eof' => "\r\n",
 //));
+$port = $serv->addListener($host, $port, $type = SWOOLE_SOCK_TCP);
+
+echo $port->port;
+echo PHP_EOL;
 
 $serv->set(array('task_worker_num'=> 4));
 
 $serv->on('Connect',function ($serv,$fd){
    echo "Client Connect \n fd:".$fd."\n".PHP_EOL;
+   $serv->bind($fd,$fd);
+   var_dump($serv->getClientInfo($fd));
+   echo PHP_EOL;
+   var_dump($serv->getClientList(0,10));
+   echo PHP_EOL;
 });
 
 $serv->on('receive', function ($serv,$fd,$form_id,$data){
@@ -39,6 +49,8 @@ $serv->on('Close',function ($serv,$fd){
     echo "Client CLOST \n";
 });
 
+
 $serv->start();
+
 
 //telnet 127.0.0.1 9511

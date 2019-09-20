@@ -3,7 +3,6 @@
 use Swoole\Coroutine\MySQL as mysql;
 use Swoole\Coroutine\Redis as redis;
 
-
 $http = new swoole_http_server("0.0.0.0", 9501);
 
 $http->on('request', function ($request, $response) {
