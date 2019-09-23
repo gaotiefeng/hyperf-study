@@ -49,7 +49,7 @@ class ArticleController extends Controller
     {
         $id = $this->request->input('id');
 
-        if(empty($id)) {
+        if (empty($id)) {
             throw new BusinessException(ErrorCode::ARTICLE_NO_EXIST);
         }
         $result = $this->biz->info($id);

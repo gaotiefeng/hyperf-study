@@ -35,10 +35,8 @@ class ArticleBiz extends Service
     {
         $id = intval($id);
         /** @var Article $item */
-        $item =  $this->dao->info($id);
+        $item = $this->dao->info($id);
 
-        $result = ArticleFormatter::instance()->base($item);
-
-        return $result;
+        return ArticleFormatter::instance()->base($item);
     }
 }

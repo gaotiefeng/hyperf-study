@@ -1,8 +1,16 @@
 <?php
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://doc.hyperf.io
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ */
 
 namespace App\Service\Search;
-
 
 use App\Service\Service;
 use Elasticsearch\ClientBuilder;
@@ -16,8 +24,8 @@ class ElasticSearch extends Service
         var_dump($articleId);
         $build = ClientBuilder::create();
 
-        if(Coroutine::getCid() > 0) {
-            $handler = make(CoroutineHandler::class,[
+        if (Coroutine::getCid() > 0) {
+            $handler = make(CoroutineHandler::class, [
                 'option' => [
                     'max_connections' => 50,
                 ],
@@ -29,13 +37,12 @@ class ElasticSearch extends Service
             'id' => $articleId,
             'index' => 'hyperf',
             'type' => 'article',
-            'body' => [ 'id'=> $articleId, 'title' => $title]
+            'body' => ['id' => $articleId, 'title' => $title],
         ];
         $client->create($params);
     }
 
     public function search()
     {
-
     }
 }

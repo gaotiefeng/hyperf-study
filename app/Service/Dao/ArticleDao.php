@@ -17,7 +17,6 @@ use App\Exception\BusinessException;
 use App\Kernel\Helper\ModelHelper;
 use App\Model\Article;
 use App\Model\ArticleUser;
-use App\Service\Search\ElasticSearch;
 use App\Service\Service;
 use Hyperf\DbConnection\Db;
 use Hyperf\Snowflake\IdGeneratorInterface;
@@ -27,7 +26,7 @@ class ArticleDao extends Service
     /**
      * @param int $articleId
      * @param bool $throw
-     * @return Model|null
+     * @return null|Model
      */
     public function first(int $articleId, bool $throw = false)
     {
@@ -59,8 +58,9 @@ class ArticleDao extends Service
 
     public function info(int $id)
     {
-        return $this->first($id,true);
+        return $this->first($id, true);
     }
+
     /**
      * @param $userId
      * @param $articleId

@@ -16,7 +16,6 @@ use App\Constants\ErrorCode;
 use App\Controller\Controller;
 use App\Exception\BusinessException;
 use App\Service\Biz\Web\ArticleBiz;
-use App\Service\Search\ElasticSearch;
 use App\Untils\JwtAuth;
 use Hyperf\CircuitBreaker\Annotation\CircuitBreaker;
 use Hyperf\Di\Annotation\Inject;
@@ -64,7 +63,7 @@ class ArticleController extends Controller
     }
 
     /**
-     *点赞
+     *点赞.
      */
     public function likes()
     {
@@ -81,10 +80,10 @@ class ArticleController extends Controller
     }
 
     /**
-     * 添加文章
+     * 添加文章.
      * @param [ 'title'=> , 'content' => ]
      * @return array
-     * [ 'code' => 0 , 'data' => true ]
+     *               [ 'code' => 0 , 'data' => true ]
      */
     public function save()
     {
@@ -92,11 +91,11 @@ class ArticleController extends Controller
 
         $userId = JwtAuth::instance()->build()->getUserId();
 
-        $validation = Validation::check($input,[
-            [['title','content'], 'required']
+        $validation = Validation::check($input, [
+            [['title', 'content'], 'required'],
         ]);
 
-        if(! $validation->isOk()) {
+        if (! $validation->isOk()) {
             throw new BusinessException(ErrorCode::SERVER_ERROR);
         }
 
@@ -115,7 +114,7 @@ class ArticleController extends Controller
     {
         $userId = 1;
         $data = [
-            'title'=> '北洋水师因何灰飞烟灭',
+            'title' => '北洋水师因何灰飞烟灭',
             'content' => '
 据新华社9月2日报道，历经两个月的水下考古调查，基本确认了北洋水师旗舰定远舰的沉没位置，并出水一批沉舰遗物。
 北洋水师自1888年组建后，迅速成为号称“亚洲第一”的海上军事力量。然而，仅仅成军不到7年，这支海军便在甲午海战中遭遇全军覆灭的命运，
@@ -123,7 +122,7 @@ class ArticleController extends Controller
 本期《出鞘》我们就来回顾这段历史',
         ];
 
-        $this->biz->save($userId,$data);
+        $this->biz->save($userId, $data);
     }
 
     public static function limitCallback(float $seconds, ProceedingJoinPoint $proceedingJoinPoint)
@@ -142,13 +141,13 @@ class ArticleController extends Controller
     {
         $userId = 1;
         $data = [
-            'title'=> '希望你继续做好红色基因的传承人',
+            'title' => '希望你继续做好红色基因的传承人',
             'content' => '习近平总书记16日下午在鄂豫皖苏区首府革命博物馆同当地红军后代、烈士家属代表交谈，红军后代黄德耀激动地紧紧握住总书记的手，
             介绍了自己的革命家史。
-            他的外祖母晏春山被捕后受尽了酷刑，最后高呼“中国共产党万岁”，纵身跳下了悬崖，被誉为大别山的“江姐”。'
+            他的外祖母晏春山被捕后受尽了酷刑，最后高呼“中国共产党万岁”，纵身跳下了悬崖，被誉为大别山的“江姐”。',
         ];
 
-        $this->biz->save($userId,$data);
+        $this->biz->save($userId, $data);
     }
 
     public function circuitFallback()
