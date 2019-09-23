@@ -21,6 +21,21 @@ use Hyperf\Constants\Annotation\Constants;
 class ErrorCode extends AbstractConstants
 {
     /**
+     * @Message("管理员不存在")
+     */
+    const ADMIN_NOT_EXITS = 7001;
+
+    /**
+     * @Message("管理员存在")
+     */
+    const ADMIN_EXITS = 7002;
+
+    /**
+     * @Message("管理员密码错误")
+     */
+    const ADMIN_PASSWORD_ERROR = 7003;
+
+    /**
      * @Message("Token Error！")
      */
     const TOKEN_NOT_EXITS = 700;

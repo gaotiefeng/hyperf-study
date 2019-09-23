@@ -20,7 +20,10 @@ class UserTest extends HttpTestCase
 {
     public function testAdminUserLogin()
     {
-        $res = $this->get('/');
+        $res = $this->adminClient->post('/user/login', [
+            'mobile' => '15904435047',
+            'password' => '123456',
+        ]);
 
         $this->assertSame(0, $res['code']);
     }

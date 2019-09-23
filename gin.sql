@@ -52,6 +52,16 @@ CREATE TABLE `user` (
   UNIQUE KEY `mobile` (`mobile`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `user_name` varchar(32) NOT NULL DEFAULT '' COMMENT '名称',
+  `mobile` char(11) NOT NULL DEFAULT '' COMMENT '手机号',
+  `password` varchar(64) NOT NULL COMMENT '密码',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `article_user`;
 CREATE TABLE `article_user` (

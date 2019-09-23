@@ -12,13 +12,44 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use Hyperf\HttpServer\Contract\RequestInterface;
-use Hyperf\HttpServer\Contract\ResponseInterface;
+use App\Constants\Constants;
+use App\Constants\ErrorCode;
+use App\Controller\Controller;
+use App\Exception\BusinessException;
+use App\Service\Biz\Admin\UserBiz;
+use Hyperf\Di\Annotation\Inject;
+use Inhere\Validate\Validation;
 
-class UserController
+class UserController extends Controller
 {
-    public function index(RequestInterface $request, ResponseInterface $response)
+    /**
+     * @Inject
+     * @var UserBiz
+     */
+    protected $biz;
+
+    /**
+     * 登录.
+     */
+    public function login()
     {
-        return $response->raw('Hello Hyperf!');
+        /*$options = Constants::options;
+        var_dump($password = password_hash('123456', PASSWORD_BCRYPT, $options));*/
+        $input = $this->request->all();
+
+        $validator = Validation::check($input, [
+            ['mobile', 'regexp', '/^1\d{10}$/'],
+            ['password', 'required', 'filter' => 'integer'],
+        ]);
+
+        if (! $validator->isOk()) {
+            throw new BusinessException(ErrorCode::SERVER_ERROR, $validator->getMessage());
+        }
+
+        $data = $validator->getSafeData();
+
+        $result = $this->biz->login($data);
+
+        return $this->response->success($result);
     }
 }

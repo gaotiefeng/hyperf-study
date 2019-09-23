@@ -13,7 +13,8 @@ declare(strict_types=1);
 use Hyperf\HttpServer\Router\Router;
 
 Router::get('/', 'App\Controller\IndexController::index');
-Router::post('/', 'App\Controller\Admin\UserController::index');
+
+Router::post('/user/login', 'App\Controller\Admin\UserController::login');
 
 Router::get('/article/index', 'App\Controller\Admin\ArticleController::index');
 Router::get('/article/info', 'App\Controller\Admin\ArticleController::info');
