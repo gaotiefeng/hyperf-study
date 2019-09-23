@@ -12,7 +12,9 @@ declare(strict_types=1);
 
 namespace App\Service\Biz\Admin;
 
+use App\Model\Article;
 use App\Service\Dao\ArticleDao;
+use App\Service\Formatter\ArticleFormatter;
 use App\Service\Service;
 use Hyperf\Di\Annotation\Inject;
 
@@ -27,5 +29,16 @@ class ArticleBiz extends Service
     public function index($data)
     {
         return $this->dao->index($data, $data['offset'], $data['limit']);
+    }
+
+    public function info($id)
+    {
+        $id = intval($id);
+        /** @var Article $item */
+        $item =  $this->dao->info($id);
+
+        $result = ArticleFormatter::instance()->base($item);
+
+        return $result;
     }
 }

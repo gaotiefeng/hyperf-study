@@ -33,7 +33,7 @@ class ArticleDao extends Service
     {
         $model = Article::query()->find($articleId);
 
-        if ($throw && ! empty($model)) {
+        if ($throw && empty($model)) {
             throw new BusinessException(ErrorCode::ARTICLE_NO_EXIST);
         }
 
@@ -57,6 +57,10 @@ class ArticleDao extends Service
         return ModelHelper::pagination($query, $offset, $limit);
     }
 
+    public function info(int $id)
+    {
+        return $this->first($id,true);
+    }
     /**
      * @param $userId
      * @param $articleId

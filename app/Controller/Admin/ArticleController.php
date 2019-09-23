@@ -48,5 +48,12 @@ class ArticleController extends Controller
     public function info()
     {
         $id = $this->request->input('id');
+
+        if(empty($id)) {
+            throw new BusinessException(ErrorCode::ARTICLE_NO_EXIST);
+        }
+        $result = $this->biz->info($id);
+
+        return $this->response->success($result);
     }
 }

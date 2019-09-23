@@ -33,6 +33,10 @@ $serv->on('receive', function ($serv,$fd,$form_id,$data){
     $taskId = $serv->task($data); //投递任务
     echo "Dispath AsyncTask: id=$taskId\n".PHP_EOL;
     $serv->send($fd, "Serve:".$data);
+
+    echo "stats->";
+    var_dump($serv->stats());
+    echo PHP_EOL;
 });
 
 $serv->on('task', function ($serv, $task_id, $form_id, $data){
@@ -51,6 +55,5 @@ $serv->on('Close',function ($serv,$fd){
 
 
 $serv->start();
-
 
 //telnet 127.0.0.1 9511

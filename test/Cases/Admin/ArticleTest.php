@@ -29,4 +29,13 @@ class ArticleTest extends HttpTestCase
 
         return $this->assertSame(0, $res['code']);
     }
+
+    public function testAdminArticleInfo()
+    {
+        $res = $this->adminClient->get('/article/info', [
+            'id' => 34636204385558529,
+        ]);
+
+        return $this->assertSame(0, $res['code']);
+    }
 }
