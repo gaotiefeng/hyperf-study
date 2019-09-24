@@ -16,6 +16,7 @@ use App\Constants\ErrorCode;
 use App\Exception\BusinessException;
 use App\Model\Admin;
 use App\Service\Dao\AdminDao;
+use App\Service\Formatter\admin\AdminFormatter;
 use App\Service\Service;
 use App\Untils\JwtAuth;
 use Hyperf\Di\Annotation\Inject;
@@ -50,5 +51,16 @@ class UserBiz extends Service
         $result['token'] = JwtAuth::instance()->init($model->id)->getToken();
 
         return $result;
+    }
+
+    /**
+     * @param $userId
+     * @return array
+     */
+    public function adminInfo($userId)
+    {
+        $item = $this->dao->info($userId);
+
+        return AdminFormatter::instance()->base($item);
     }
 }

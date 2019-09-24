@@ -27,4 +27,12 @@ class UserTest extends HttpTestCase
 
         $this->assertSame(0, $res['code']);
     }
+
+    public function testAdminUserInfo()
+    {
+        $res = $this->adminClient->get('/user/info', [
+        ]);
+
+        $this->assertSame(0, $res['code']);
+    }
 }

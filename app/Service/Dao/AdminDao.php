@@ -19,6 +19,11 @@ use App\Service\Service;
 
 class AdminDao extends Service
 {
+    /**
+     * @param int $id
+     * @param bool $throw
+     * @return null|Admin
+     */
     public function first(int $id, bool $throw = false)
     {
         $model = Admin::query()->find($id);
@@ -30,6 +35,11 @@ class AdminDao extends Service
         return $model;
     }
 
+    /**
+     * @param $mobile
+     * @param bool $throw
+     * @return null|Model|object
+     */
     public function mobile($mobile, bool $throw = false)
     {
         $model = Admin::query()->where('mobile', '=', $mobile)->first();
@@ -39,5 +49,14 @@ class AdminDao extends Service
         }
 
         return $model;
+    }
+
+    /**
+     * @param $userId
+     * @return null|Model
+     */
+    public function info($userId)
+    {
+        return $this->first($userId, true);
     }
 }

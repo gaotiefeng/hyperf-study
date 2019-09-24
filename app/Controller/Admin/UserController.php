@@ -40,7 +40,7 @@ class UserController extends Controller
 
         $validator = Validation::check($input, [
             ['mobile', 'regexp', '/^1\d{10}$/'],
-            ['password', 'required', 'filter'=> 'string'],
+            ['password', 'required', 'filter' => 'string'],
         ]);
 
         if (! $validator->isOk()) {
@@ -50,6 +50,15 @@ class UserController extends Controller
         $data = $validator->getSafeData();
 
         $result = $this->biz->login($data);
+
+        return $this->response->success($result);
+    }
+
+    public function info()
+    {
+        $userId = 1;
+
+        $result = $this->biz->adminInfo($userId);
 
         return $this->response->success($result);
     }
