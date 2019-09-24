@@ -33,17 +33,18 @@ class UserController extends Controller
      */
     public function login()
     {
-        /*$options = Constants::options;
-        var_dump($password = password_hash('123456', PASSWORD_BCRYPT, $options));*/
+//        $options = Constants::options;
+//        var_dump($password = password_hash('111111', PASSWORD_BCRYPT, $options));
+
         $input = $this->request->all();
 
         $validator = Validation::check($input, [
             ['mobile', 'regexp', '/^1\d{10}$/'],
-            ['password', 'required', 'filter' => 'integer'],
+            ['password', 'required', 'filter'=> 'string'],
         ]);
 
         if (! $validator->isOk()) {
-            throw new BusinessException(ErrorCode::SERVER_ERROR, $validator->getMessage());
+            throw new BusinessException(ErrorCode::SERVER_ERROR, $validator->firstError());
         }
 
         $data = $validator->getSafeData();

@@ -16,4 +16,8 @@ return [
         \App\Middleware\CorsMiddleware::class,
         \App\Middleware\DebugMiddleware::class,
     ],
+    'admin' => [
+        \App\Middleware\CorsMiddleware::class,
+        \App\Middleware\DebugMiddleware::class,
+    ],
 ];
