@@ -14,6 +14,8 @@ use Hyperf\HttpServer\Router\Router;
 
 Router::get('/', 'App\Controller\IndexController::index');
 
+Router::get('/admin/index', 'App\Controller\Admin\AdminController::index');
+
 Router::post('/user/login', 'App\Controller\Admin\UserController::login');
 Router::get('/user/info', 'App\Controller\Admin\UserController::info');
 

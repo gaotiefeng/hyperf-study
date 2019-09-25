@@ -14,6 +14,7 @@ namespace App\Service\Dao;
 
 use App\Constants\ErrorCode;
 use App\Exception\BusinessException;
+use App\Kernel\Helper\ModelHelper;
 use App\Model\Admin;
 use App\Service\Service;
 
@@ -35,6 +36,12 @@ class AdminDao extends Service
         return $model;
     }
 
+    public function index($offset,$limit)
+    {
+        $query = Admin::query();
+
+        return ModelHelper::pagination($query,$offset,$limit);
+    }
     /**
      * @param $mobile
      * @param bool $throw
