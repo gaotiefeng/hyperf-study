@@ -1,30 +1,23 @@
 <?php
 
 declare (strict_types=1);
-/**
- * This file is part of Hyperf.
- *
- * @link     https://www.hyperf.io
- * @document https://doc.hyperf.io
- * @contact  group@hyperf.io
- * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
- */
 namespace App\Model;
 
 use Hyperf\DbConnection\Model\Model;
 /**
  * @property int $id
- * @property int $user_id
- * @property int $article_id
+ * @property string $name
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  */
-class ArticleUser extends Model
+class Role extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'article_user';
+    protected $table = 'role';
     /**
      * The connection name for the model.
      *
@@ -36,11 +29,11 @@ class ArticleUser extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'user_id', 'article_id'];
+    protected $fillable = ['id', 'name', 'created_at', 'updated_at'];
     /**
      * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'article_id' => 'integer'];
+    protected $casts = ['id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 }
