@@ -23,6 +23,8 @@ class AdminFormatter extends Formatter
             'id' => $model->id,
             'mobile' => $model->mobile,
             'username' => $model->user_name,
+            'created_at' => $model->created_at,
+            'updated_at' => $model->updated_at,
         ];
     }
 }
