@@ -11,8 +11,6 @@ declare(strict_types=1);
  */
 
 return [
-    'dependencies' => [
-        Hyperf\Contract\StdoutLoggerInterface::class => App\Kernel\Log\LoggerFactory::class,
-        'AdminServer' => Hyperf\HttpServer\ServerFactory::class,
-    ],
+    Hyperf\Contract\StdoutLoggerInterface::class => App\Kernel\Log\LoggerFactory::class,
+    'AdminServer' => Hyperf\HttpServer\Server::class,
 ];
