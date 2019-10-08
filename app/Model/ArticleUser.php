@@ -29,13 +29,6 @@ class ArticleUser extends Model
     protected $table = 'article_user';
 
     /**
-     * The connection name for the model.
-     *
-     * @var string
-     */
-    protected $connection = 'default';
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array

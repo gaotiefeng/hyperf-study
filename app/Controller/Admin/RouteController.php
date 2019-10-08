@@ -13,9 +13,17 @@ declare(strict_types=1);
 namespace App\Controller\admin;
 
 use App\Controller\Controller;
+use App\Service\Biz\Admin\RouteBiz;
+use Hyperf\Di\Annotation\Inject;
 
 class RouteController extends Controller
 {
+    /**
+     * @Inject
+     * @var RouteBiz
+     */
+    protected $biz;
+
     public function index()
     {
     }
@@ -23,5 +31,12 @@ class RouteController extends Controller
     public function save()
     {
         $input = $this->request->all();
+
+        var_dump($input);
+        //$result = $this->biz->save($input);
+
+        di()->get(RouteBiz::class)->save($input);
+
+        return $this->response->success(1);
     }
 }

@@ -34,13 +34,6 @@ class User extends Model
     protected $table = 'user';
 
     /**
-     * The connection name for the model.
-     *
-     * @var string
-     */
-    protected $connection = 'default';
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array

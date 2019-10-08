@@ -32,13 +32,6 @@ class Admin extends Model
     protected $table = 'admin';
 
     /**
-     * The connection name for the model.
-     *
-     * @var string
-     */
-    protected $connection = 'default';
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array

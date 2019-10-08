@@ -31,13 +31,6 @@ class RoleRoute extends Model
     protected $table = 'role_route';
 
     /**
-     * The connection name for the model.
-     *
-     * @var string
-     */
-    protected $connection = 'default';
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array

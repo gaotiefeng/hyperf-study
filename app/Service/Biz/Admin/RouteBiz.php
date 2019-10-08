@@ -12,15 +12,27 @@ declare(strict_types=1);
 
 namespace App\Service\Biz\Admin;
 
+use App\Service\Dao\RouteDao;
 use App\Service\Service;
+use Hyperf\Di\Annotation\Inject;
 
 class RouteBiz extends Service
 {
+    /**
+     * @Inject()
+     * @var RouteDao
+     */
+    protected $dao;
+
     public function list()
     {
+
     }
 
-    public function save()
+    public function save(array $data)
     {
+        echo 111;
+        var_dump($data);
+        return $this->dao->save($data);
     }
 }
