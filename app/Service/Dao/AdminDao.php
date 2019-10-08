@@ -36,12 +36,13 @@ class AdminDao extends Service
         return $model;
     }
 
-    public function index($offset,$limit)
+    public function index($offset, $limit)
     {
         $query = Admin::query();
 
-        return ModelHelper::pagination($query,$offset,$limit);
+        return ModelHelper::pagination($query, $offset, $limit);
     }
+
     /**
      * @param $mobile
      * @param bool $throw
@@ -73,6 +74,6 @@ class AdminDao extends Service
      */
     public function delete(int $id)
     {
-        return Admin::query()->where('id','=', $id)->delete();
+        return Admin::query()->where('id', '=', $id)->delete();
     }
 }
