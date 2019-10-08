@@ -15,6 +15,7 @@ class RouteController extends Controller
 
     public function save()
     {
+        $input = $this->request->all();
 
     }
 }

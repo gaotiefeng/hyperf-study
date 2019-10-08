@@ -31,4 +31,13 @@ class AdminBiz extends Service
 
         return $result;
     }
+
+    /**
+     * @param int $id
+     * @return int|mixed
+     */
+    public function delete(int $id)
+    {
+        return $this->dao->delete($id);
+    }
 }

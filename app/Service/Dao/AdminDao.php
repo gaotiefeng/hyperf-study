@@ -66,4 +66,13 @@ class AdminDao extends Service
     {
         return $this->first($userId, true);
     }
+
+    /**
+     * @param int $id
+     * @return int|mixed
+     */
+    public function delete(int $id)
+    {
+        return Admin::query()->where('id','=', $id)->delete();
+    }
 }
