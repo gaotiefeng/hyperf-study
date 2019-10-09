@@ -27,7 +27,6 @@ class RouteController extends Controller
      */
     protected $biz;
 
-
     public function index()
     {
         $input = $this->request->all();
@@ -44,14 +43,12 @@ class RouteController extends Controller
     {
         $input = $this->request->all();
 
-        $validation = Validation::check($input,[
-
-           [['name','icon','route'],'required'],
-
+        $validation = Validation::check($input, [
+            [['name', 'icon', 'route'], 'required'],
         ]);
 
-        if(!$validation->isOk()) {
-            throw new BusinessException(ErrorCode::SERVER_ERROR,$validation->firstError());
+        if (! $validation->isOk()) {
+            throw new BusinessException(ErrorCode::SERVER_ERROR, $validation->firstError());
         }
 
         $data = $validation->getSafeData();

@@ -47,6 +47,6 @@ class Admin extends Model
 
     public function role()
     {
-        return $this->belongsToMany(Role::class, 'admin_role','admin_id', 'role_id');
+        return $this->belongsToMany(Role::class, 'admin_role', 'admin_id', 'role_id');
     }
 }

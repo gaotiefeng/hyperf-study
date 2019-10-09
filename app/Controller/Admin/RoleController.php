@@ -17,8 +17,6 @@ use App\Controller\Controller;
 use App\Exception\BusinessException;
 use App\Service\Biz\Admin\RoleBiz;
 use Hyperf\Di\Annotation\Inject;
-use Hyperf\HttpServer\Contract\RequestInterface;
-use Hyperf\HttpServer\Contract\ResponseInterface;
 use Inhere\Validate\Validation;
 
 class RoleController extends Controller
@@ -33,11 +31,11 @@ class RoleController extends Controller
     {
         $input = $this->request->all();
 
-        $validation = Validation::check($input,[
-            [['offset','limit'], 'required', 'filter'=>'integer' ],
+        $validation = Validation::check($input, [
+            [['offset', 'limit'], 'required', 'filter' => 'integer'],
         ]);
 
-        if(!$validation->isOk()) {
+        if (! $validation->isOk()) {
             throw new BusinessException(ErrorCode::SERVER_ERROR, $validation->firstError());
         }
         $data = $validation->getSafeData();
@@ -51,14 +49,12 @@ class RoleController extends Controller
     {
         $input = $this->request->all();
 
-        $validation = Validation::check($input,[
-
-            [['name'],'required'],
-
+        $validation = Validation::check($input, [
+            [['name'], 'required'],
         ]);
 
-        if(!$validation->isOk()) {
-            throw new BusinessException(ErrorCode::SERVER_ERROR,$validation->firstError());
+        if (! $validation->isOk()) {
+            throw new BusinessException(ErrorCode::SERVER_ERROR, $validation->firstError());
         }
 
         $data = $validation->getSafeData();

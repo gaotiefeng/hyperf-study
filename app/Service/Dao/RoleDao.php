@@ -22,7 +22,7 @@ class RoleDao extends Service
     {
         $query = Role::query();
 
-        return ModelHelper::pagination($query,$data['offset'], $data['limit']);
+        return ModelHelper::pagination($query, $data['offset'], $data['limit']);
     }
 
     /**

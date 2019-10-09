@@ -22,9 +22,9 @@ class RouteTest extends HttpTestCase
 {
     public function testAdminRouteIndex()
     {
-        $res = $this->adminClient->get('/route/index',[
-           'offset' => 0,
-           'limit' => 10,
+        $res = $this->adminClient->get('/route/index', [
+            'offset' => 0,
+            'limit' => 10,
         ]);
 
         $this->assertSame(0, $res['code']);

@@ -45,6 +45,6 @@ class Role extends Model
 
     public function route()
     {
-        return $this->belongsToMany(Route::class,'role_route','route_id','role_id');
+        return $this->belongsToMany(Route::class, 'role_route', 'route_id', 'role_id');
     }
 }

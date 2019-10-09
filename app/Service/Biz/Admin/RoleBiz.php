@@ -31,7 +31,7 @@ class RoleBiz extends Service
 
         $result['count'] = $count;
 
-        foreach ($items as $k=>$item) {
+        foreach ($items as $k => $item) {
             $result['items'][$k] = RoleFormatter::instance()->base($item);
         }
 
