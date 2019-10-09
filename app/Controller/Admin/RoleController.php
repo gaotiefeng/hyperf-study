@@ -12,11 +12,14 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
+use App\Constants\ErrorCode;
 use App\Controller\Controller;
+use App\Exception\BusinessException;
 use App\Service\Biz\Admin\RoleBiz;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
+use Inhere\Validate\Validation;
 
 class RoleController extends Controller
 {
@@ -35,7 +38,19 @@ class RoleController extends Controller
     {
         $input = $this->request->all();
 
-        $result = $this->biz->save($input);
+        $validation = Validation::check($input,[
+
+            [['name'],'required'],
+
+        ]);
+
+        if(!$validation->isOk()) {
+            throw new BusinessException(ErrorCode::SERVER_ERROR,$validation->firstError());
+        }
+
+        $data = $validation->getSafeData();
+
+        $result = $this->biz->save($data);
 
         return $this->response->success($result);
     }

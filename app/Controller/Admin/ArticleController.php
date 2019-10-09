@@ -36,7 +36,7 @@ class ArticleController extends Controller
         ]);
 
         if (! $validation->isOk()) {
-            throw new BusinessException(ErrorCode::SERVER_ERROR);
+            throw new BusinessException(ErrorCode::SERVER_ERROR,$validation->firstError());
         }
         $data = $validation->getSafeData();
 
