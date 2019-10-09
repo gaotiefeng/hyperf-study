@@ -62,15 +62,18 @@ class RoleController extends Controller
     {
         $input = $this->request->all();
 
-        $validation = Validation::check($input, [
-            [['name'], 'required'],
-        ]);
+        $message = [
+            'name.required' => '名称必填',
+            'name.max' => '名称不能超过32长度',
+        ];
+        $validation = $this->validationFactory->make($input, [
+            'name' => 'required | max:32',
+        ], $message);
 
-        if (! $validation->isOk()) {
-            throw new BusinessException(ErrorCode::SERVER_ERROR, $validation->firstError());
+        if ($validation->fails()) {
+            throw  new BusinessException(ErrorCode::SERVER_ERROR, $validation->errors()->first());
         }
-
-        $data = $validation->getSafeData();
+        $data = $validation->validated();
 
         $result = $this->biz->save($data);
 

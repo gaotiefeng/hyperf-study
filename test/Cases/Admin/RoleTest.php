@@ -33,7 +33,7 @@ class RoleTest extends HttpTestCase
     public function testAdminRoleSave()
     {
         $res = $this->adminClient->post('/role/save', [
-            'name' => '12321',
+            'name' => '角色名称',
         ]);
 
         $this->assertSame(0, $res['code']);
