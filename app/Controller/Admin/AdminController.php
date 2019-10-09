@@ -17,6 +17,7 @@ use App\Controller\Controller;
 use App\Exception\BusinessException;
 use App\Service\Biz\Admin\AdminBiz;
 use Hyperf\Di\Annotation\Inject;
+use Hyperf\Validation\Contract\ValidatorFactoryInterface;
 
 class AdminController extends Controller
 {
@@ -26,12 +27,33 @@ class AdminController extends Controller
      */
     protected $biz;
 
+    /**
+     * @Inject
+     * @var ValidatorFactoryInterface
+     */
+    protected $validationFactory;
+
     public function index()
     {
         $input = $this->request->all();
 
-        $offset = $this->request->input('offset', 0);
-        $limit = $this->request->input('limit', 10);
+        $message = [
+            'offset.required' => '偏移量不能为空',
+            'limit.required' => '条数不能空并且为整数',
+        ];
+        $validation = $this->validationFactory->make($input, [
+            'offset' => 'required | integer',
+            'limit' => 'required | integer',
+        ], $message);
+
+        if ($validation->fails()) {
+            throw  new BusinessException(ErrorCode::SERVER_ERROR, $validation->errors()->first());
+        }
+
+        $data = $validation->validated();
+
+        $offset = $data['offset'];
+        $limit = $data['limit'];
 
         $result = $this->biz->index($offset, $limit);
 
