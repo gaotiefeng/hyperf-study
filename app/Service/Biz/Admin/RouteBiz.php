@@ -19,20 +19,17 @@ use Hyperf\Di\Annotation\Inject;
 class RouteBiz extends Service
 {
     /**
-     * @Inject()
+     * @Inject
      * @var RouteDao
      */
     protected $dao;
 
     public function list()
     {
-
     }
 
     public function save(array $data)
     {
-        echo 111;
-        var_dump($data);
         return $this->dao->save($data);
     }
 }

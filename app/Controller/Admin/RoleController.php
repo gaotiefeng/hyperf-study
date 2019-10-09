@@ -10,42 +10,33 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
 
-namespace App\Controller\admin;
+namespace App\Controller\Admin;
 
-use App\Constants\ErrorCode;
 use App\Controller\Controller;
-use App\Exception\BusinessException;
+use App\Service\Biz\Admin\RoleBiz;
 use Hyperf\Di\Annotation\Inject;
-use Hyperf\Validation\Contract\ValidatorFactoryInterface;
+use Hyperf\HttpServer\Contract\RequestInterface;
+use Hyperf\HttpServer\Contract\ResponseInterface;
 
 class RoleController extends Controller
 {
     /**
      * @Inject
-     * @var ValidatorFactoryInterface
+     * @var RoleBiz
      */
-    protected $validationFactory;
+    protected $biz;
 
-    public function index()
+    public function index(RequestInterface $request, ResponseInterface $response)
     {
+        return $response->raw('Hello Hyperf!');
     }
 
     public function save()
     {
         $input = $this->request->all();
 
-        $validator = $this->validationFactory->make($input, [
-            'name.required' => '名称必填',
-        ]);
+        $result = $this->biz->save($input);
 
-        if ($validator->fails()) {
-            throw new BusinessException(ErrorCode::SERVER_ERROR, $validator->errors()->first());
-        }
-
-        $data = $validator->validated();
-
-        var_dump($data);
-
-        return $this->response->success();
+        return $this->response->success($result);
     }
 }

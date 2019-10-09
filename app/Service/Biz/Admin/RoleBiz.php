@@ -12,15 +12,24 @@ declare(strict_types=1);
 
 namespace App\Service\Biz\Admin;
 
+use App\Service\Dao\RoleDao;
 use App\Service\Service;
+use Hyperf\Di\Annotation\Inject;
 
 class RoleBiz extends Service
 {
+    /**
+     * @Inject(required=false)
+     * @var RoleDao
+     */
+    protected $dao;
+
     public function list()
     {
     }
 
-    public function save()
+    public function save(array $data)
     {
+        return $this->dao->save($data);
     }
 }

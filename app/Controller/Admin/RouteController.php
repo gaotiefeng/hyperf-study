@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
 
-namespace App\Controller\admin;
+namespace App\Controller\Admin;
 
 use App\Controller\Controller;
 use App\Service\Biz\Admin\RouteBiz;
@@ -32,11 +32,8 @@ class RouteController extends Controller
     {
         $input = $this->request->all();
 
-        var_dump($input);
-        //$result = $this->biz->save($input);
+        $result = $this->biz->save($input);
 
-        di()->get(RouteBiz::class)->save($input);
-
-        return $this->response->success(1);
+        return $this->response->success($result);
     }
 }

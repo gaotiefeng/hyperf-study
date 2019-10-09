@@ -12,8 +12,16 @@ declare(strict_types=1);
 
 namespace App\Service\Dao;
 
+use App\Model\Role;
 use App\Service\Service;
 
 class RoleDao extends Service
 {
+    public function save(array $data)
+    {
+        $model = new Role();
+        $model->name = $data['name'];
+
+        return $model->save();
+    }
 }
