@@ -39,7 +39,9 @@ class ArticleController extends Controller
 
         $message = [
             'offset.required' => '偏移量不能为空',
-            'limit.required' => '条数不能空并且为整数',
+            'limit.required' => '条数不能空',
+            'offset.integer' => '偏移量为整数',
+            'limit.integer' => '条数为整数',
         ];
         $validation = $this->validationFactory->make($input, [
             'offset' => 'required | integer',
