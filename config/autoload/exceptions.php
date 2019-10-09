@@ -10,10 +10,15 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
 
+use App\Exception\Handler\BusinessExceptionHandler;
+
 return [
     'handler' => [
         'http' => [
-            App\Exception\Handler\AppExceptionHandler::class,
+            BusinessExceptionHandler::class,
+        ],
+        'admin' => [
+            BusinessExceptionHandler::class,
         ],
     ],
 ];

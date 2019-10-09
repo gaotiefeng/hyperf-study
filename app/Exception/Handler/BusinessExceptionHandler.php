@@ -21,7 +21,7 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
-class AppExceptionHandler extends ExceptionHandler
+class BusinessExceptionHandler extends ExceptionHandler
 {
     /**
      * @var StdoutLoggerInterface

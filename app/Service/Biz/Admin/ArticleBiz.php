@@ -42,6 +42,7 @@ class ArticleBiz extends Service
     public function info($id)
     {
         $id = intval($id);
+
         /** @var Article $item */
         $item = $this->dao->info($id);
 
