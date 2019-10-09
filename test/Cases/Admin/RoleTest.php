@@ -22,6 +22,12 @@ class RoleTest extends HttpTestCase
 {
     public function testAdminRoleIndex()
     {
+        $res = $this->adminClient->get('/role/index',[
+           'offset' => 0,
+           'limit' => 10
+        ]);
+
+        $this->assertSame(0, $res['code']);
     }
 
     public function testAdminRoleSave()

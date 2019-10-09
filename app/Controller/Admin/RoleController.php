@@ -29,9 +29,22 @@ class RoleController extends Controller
      */
     protected $biz;
 
-    public function index(RequestInterface $request, ResponseInterface $response)
+    public function index()
     {
-        return $response->raw('Hello Hyperf!');
+        $input = $this->request->all();
+
+        $validation = Validation::check($input,[
+            [['offset','limit'], 'required', 'filter'=>'integer' ],
+        ]);
+
+        if(!$validation->isOk()) {
+            throw new BusinessException(ErrorCode::SERVER_ERROR, $validation->firstError());
+        }
+        $data = $validation->getSafeData();
+
+        $result = $this->biz->list($data);
+
+        return $this->response->success($result);
     }
 
     public function save()

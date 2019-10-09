@@ -20,6 +20,16 @@ use HyperfTest\HttpTestCase;
  */
 class RouteTest extends HttpTestCase
 {
+    public function testAdminRouteIndex()
+    {
+        $res = $this->adminClient->get('/route/index',[
+           'offset' => 0,
+           'limit' => 10,
+        ]);
+
+        $this->assertSame(0, $res['code']);
+    }
+
     public function testAdminRouteSave()
     {
         $res = $this->adminClient->post('/route/save', [

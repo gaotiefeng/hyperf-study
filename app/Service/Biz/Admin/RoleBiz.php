@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace App\Service\Biz\Admin;
 
 use App\Service\Dao\RoleDao;
+use App\Service\Formatter\admin\RoleFormatter;
 use App\Service\Service;
 use Hyperf\Di\Annotation\Inject;
 
@@ -24,8 +25,17 @@ class RoleBiz extends Service
      */
     protected $dao;
 
-    public function list()
+    public function list(array $data)
     {
+        [$count, $items] = $this->dao->index($data);
+
+        $result['count'] = $count;
+
+        foreach ($items as $k=>$item) {
+            $result['items'][$k] = RoleFormatter::instance()->base($item);
+        }
+
+        return $result;
     }
 
     public function save(array $data)

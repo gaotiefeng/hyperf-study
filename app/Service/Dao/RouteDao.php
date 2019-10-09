@@ -14,6 +14,7 @@ namespace App\Service\Dao;
 
 use App\Constants\ErrorCode;
 use App\Exception\BusinessException;
+use App\Kernel\Helper\ModelHelper;
 use App\Model\Route;
 use App\Service\Service;
 
@@ -33,6 +34,13 @@ class RouteDao extends Service
         }
 
         return $model;
+    }
+
+    public function index($offset = 0, $limit = 10)
+    {
+        $query = Route::query();
+
+        return ModelHelper::pagination($query, $offset, $limit);
     }
 
     /**

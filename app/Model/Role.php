@@ -42,4 +42,9 @@ class Role extends Model
      * @var array
      */
     protected $casts = ['id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+
+    public function route()
+    {
+        return $this->belongsToMany(Route::class,'role_route','route_id','role_id');
+    }
 }

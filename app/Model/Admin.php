@@ -44,4 +44,9 @@ class Admin extends Model
      * @var array
      */
     protected $casts = ['id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+
+    public function role()
+    {
+        return $this->belongsToMany(Role::class, 'admin_role','admin_id', 'role_id');
+    }
 }

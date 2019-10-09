@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace App\Service\Biz\Admin;
 
 use App\Service\Dao\RouteDao;
+use App\Service\Formatter\admin\RouteFormatter;
 use App\Service\Service;
 use Hyperf\Di\Annotation\Inject;
 
@@ -24,8 +25,16 @@ class RouteBiz extends Service
      */
     protected $dao;
 
-    public function list()
+    public function list($offset, $limit)
     {
+        [$count,$items] = $this->dao->index($offset, $limit);
+
+        $result['count'] = $count;
+        foreach ($items as $k => $item) {
+            $result['items'][$k] = RouteFormatter::instance()->base($item);
+        }
+
+        return $result;
     }
 
     public function save(array $data)

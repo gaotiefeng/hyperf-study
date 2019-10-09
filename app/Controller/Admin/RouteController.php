@@ -30,6 +30,14 @@ class RouteController extends Controller
 
     public function index()
     {
+        $input = $this->request->all();
+
+        $offset = $this->request->input('offset', 0);
+        $limit = $this->request->input('limit', 10);
+
+        $result = $this->biz->list($offset, $limit);
+
+        return $this->response->success($result);
     }
 
     public function save()
