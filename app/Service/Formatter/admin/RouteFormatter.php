@@ -23,6 +23,7 @@ class RouteFormatter extends Formatter
             'id' => $model->id,
             'route' => $model->route,
             'name' => $model->name,
+            'icon' => $model->icon,
             'created_at' => $model->created_at,
         ];
     }
