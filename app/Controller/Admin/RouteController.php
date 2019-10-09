@@ -24,6 +24,7 @@ class RouteController extends Controller
      */
     protected $biz;
 
+
     public function index()
     {
     }
