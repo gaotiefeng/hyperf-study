@@ -79,4 +79,17 @@ class RouteController extends Controller
 
         return $this->response->success($result);
     }
+
+    public function delete()
+    {
+        $id = $this->request->input('id');
+
+        if(empty($id)) {
+            throw new BusinessException(ErrorCode::Router_NO_EXIST);
+        }
+
+        $result = $this->biz->delete($id);
+
+        return $this->response->success($result);
+    }
 }

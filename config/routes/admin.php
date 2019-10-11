@@ -19,6 +19,7 @@ Router::post('/admin/delete', 'App\Controller\Admin\AdminController::delete');
 
 Router::post('/route/save', 'App\Controller\Admin\RouteController::save');
 Router::get('/route/index', 'App\Controller\Admin\RouteController::index');
+Router::post('/route/delete', 'App\Controller\Admin\RouteController::delete');
 
 Router::post('/role/save', 'App\Controller\Admin\RoleController::save');
 Router::get('/role/index', 'App\Controller\Admin\RoleController::index');

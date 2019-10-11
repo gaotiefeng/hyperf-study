@@ -56,4 +56,15 @@ class RouteDao extends Service
 
         return $model->save();
     }
+
+    /**
+     * @param int $id
+     * @return int|mixed
+     */
+    public function delete(int $id)
+    {
+        $this->first($id, true);
+
+        return Route::query()->where('id', '=', $id)->delete();
+    }
 }

@@ -84,4 +84,9 @@ class ErrorCode extends AbstractConstants
      * @Message("验证码错误")
      */
     const CAPTCHA_NO_EXIST = 3500;
+
+    /**
+     * @Message("路由不存在")
+     */
+    const Router_NO_EXIST = 4404;
 }

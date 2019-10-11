@@ -25,6 +25,11 @@ class RouteBiz extends Service
      */
     protected $dao;
 
+    /**
+     * @param $offset
+     * @param $limit
+     * @return mixed
+     */
     public function list($offset, $limit)
     {
         [$count,$items] = $this->dao->index($offset, $limit);
@@ -37,8 +42,21 @@ class RouteBiz extends Service
         return $result;
     }
 
+    /**
+     * @param array $data
+     * @return bool
+     */
     public function save(array $data)
     {
         return $this->dao->save($data);
+    }
+
+    /**
+     * @param int $id
+     * @return int|mixed
+     */
+    public function delete(int $id)
+    {
+        return $this->dao->delete($id);
     }
 }
