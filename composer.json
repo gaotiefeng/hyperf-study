@@ -49,7 +49,8 @@
         "hyperf/crontab": "^1.1",
         "hyperf/snowflake": "^1.1",
         "hyperf/circuit-breaker": "^1.1",
-        "hyperf/validation": "^1.1"
+        "hyperf/validation": "^1.1",
+        "phpmailer/phpmailer": "^6.1"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",
