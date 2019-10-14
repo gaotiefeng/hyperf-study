@@ -84,7 +84,7 @@ class RouteController extends Controller
     {
         $id = $this->request->input('id');
 
-        if(empty($id)) {
+        if (empty($id)) {
             throw new BusinessException(ErrorCode::Router_NO_EXIST);
         }
 

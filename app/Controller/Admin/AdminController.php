@@ -16,7 +16,6 @@ use App\Constants\ErrorCode;
 use App\Controller\Controller;
 use App\Exception\BusinessException;
 use App\Service\Biz\Admin\AdminBiz;
-use App\Service\Client\Mailer;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Validation\Contract\ValidatorFactoryInterface;
 
@@ -36,8 +35,6 @@ class AdminController extends Controller
 
     public function index()
     {
-        di()->get(Mailer::class)->sendMailer();
-
         $input = $this->request->all();
 
         $message = [

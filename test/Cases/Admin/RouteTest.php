@@ -44,7 +44,7 @@ class RouteTest extends HttpTestCase
     public function testAdminRouteDelete()
     {
         $res = $this->adminClient->post('/route/delete', [
-            'id' => 1
+            'id' => 1,
         ]);
 
         $this->assertSame(0, $res['code']);

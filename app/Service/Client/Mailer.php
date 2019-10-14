@@ -1,12 +1,20 @@
 <?php
 
+declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://doc.hyperf.io
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ */
 
 namespace App\Service\Client;
 
-
+use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
 
 class Mailer
 {
@@ -45,7 +53,7 @@ class Mailer
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = 'You are very 漂亮';
-            $mail->Body    = '<h6>I love you</h6><b>!</b>';
+            $mail->Body = '<h6>I love you</h6><b>!</b>';
             $mail->CharSet = 'UTF-8';
 
             $mail->send();

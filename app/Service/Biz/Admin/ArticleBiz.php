@@ -14,9 +14,9 @@ namespace App\Service\Biz\Admin;
 
 use App\Model\Article;
 use App\Service\Dao\ArticleDao;
+use App\Service\Formatter\admin\ArticleFormatter;
 use App\Service\Service;
 use Hyperf\Di\Annotation\Inject;
-use App\Service\Formatter\admin\ArticleFormatter;
 
 class ArticleBiz extends Service
 {
@@ -32,8 +32,8 @@ class ArticleBiz extends Service
 
         $result['count'] = $count;
         foreach ($items as $k => $item) {
-            /** @var Article $item */
-            $result['items'][$k] = ArticleFormatter::instance()->detail($item,$item->user);
+            /* @var Article $item */
+            $result['items'][$k] = ArticleFormatter::instance()->detail($item, $item->user);
         }
 
         return $result;

@@ -18,7 +18,6 @@ use App\Exception\BusinessException;
 use App\Service\Biz\Admin\RoleBiz;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Validation\Contract\ValidatorFactoryInterface;
-use Inhere\Validate\Validation;
 
 class RoleController extends Controller
 {
