@@ -17,6 +17,7 @@ use App\Exception\BusinessException;
 use Firebase\JWT\JWT;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Utils\Traits\StaticInstance;
+use Throwable;
 
 class JwtAuth
 {
@@ -94,7 +95,7 @@ class JwtAuth
         try {
             $decoded = JWT::decode($token, $this->key, ['HS256']);
             return $decoded->data->user_id;
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             $this->logger->warning('Decode token failed. Message = ' . $exception->getMessage());
         }
 

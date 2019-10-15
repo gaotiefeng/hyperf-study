@@ -18,8 +18,10 @@ use App\Kernel\Helper\ModelHelper;
 use App\Model\Article;
 use App\Model\ArticleUser;
 use App\Service\Service;
+use Hyperf\Database\Model\Collection;
 use Hyperf\DbConnection\Db;
 use Hyperf\Snowflake\IdGeneratorInterface;
+use Throwable;
 
 class ArticleDao extends Service
 {
@@ -43,7 +45,7 @@ class ArticleDao extends Service
      * @param array $data
      * @param int $offset
      * @param int $limit
-     * @return \Hyperf\Database\Model\Collection|ModelHelper[]
+     * @return Collection|ModelHelper[]
      */
     public function index(array $data, $offset = 0, $limit = 10)
     {
@@ -81,7 +83,7 @@ class ArticleDao extends Service
             $articleUser->save();
 
             Db::commit();
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             Db::rollBack();
             return false;
         }

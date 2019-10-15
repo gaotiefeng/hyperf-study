@@ -1,6 +1,9 @@
 #!/usr/bin/env php
 <?php
 
+use Hyperf\Contract\ApplicationInterface;
+use Psr\Container\ContainerInterface;
+
 ini_set('display_errors', 'on');
 ini_set('display_startup_errors', 'on');
 
@@ -14,9 +17,9 @@ require BASE_PATH . '/vendor/autoload.php';
 
 // Self-called anonymous function that creates its own scope and keep the global namespace clean.
 (function () {
-    /** @var \Psr\Container\ContainerInterface $container */
+    /** @var ContainerInterface $container */
     $container = require BASE_PATH . '/config/container.php';
 
-    $application = $container->get(\Hyperf\Contract\ApplicationInterface::class);
+    $application = $container->get(ApplicationInterface::class);
     $application->run();
 })();

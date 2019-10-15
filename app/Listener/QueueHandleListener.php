@@ -21,6 +21,7 @@ use Hyperf\Event\Annotation\Listener;
 use Hyperf\Event\Contract\ListenerInterface;
 use Hyperf\ExceptionHandler\Formatter\FormatterInterface;
 use Hyperf\Logger\LoggerFactory;
+use Psr\Log\LoggerInterface;
 
 /**
  * @Listener
@@ -28,7 +29,7 @@ use Hyperf\Logger\LoggerFactory;
 class QueueHandleListener implements ListenerInterface
 {
     /**
-     * @var \Psr\Log\LoggerInterface
+     * @var LoggerInterface
      */
     protected $logger;
 
