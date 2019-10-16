@@ -74,7 +74,10 @@ class ArticleBiz extends Service
         /** @var Article $model */
         $model = $this->dao->save($userId, $data);
 
-        di()->get(ElasticSearch::class)->create($model->id, $model->title);
+        $data['id'] = $model->id;
+        $data['user_id'] = $userId;
+
+        di()->get(ElasticSearch::class)->create('gin','article',$model->id,$data);
 
         return $model;
     }

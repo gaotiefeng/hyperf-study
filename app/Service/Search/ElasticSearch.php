@@ -14,14 +14,25 @@ namespace App\Service\Search;
 
 use App\Service\Service;
 use Elasticsearch\ClientBuilder;
+use Hyperf\Config\Annotation\Value;
+use Hyperf\Di\Annotation\Inject;
 use Hyperf\Guzzle\RingPHP\CoroutineHandler;
+use Psr\Container\ContainerInterface;
 use Swoole\Coroutine;
 
 class ElasticSearch extends Service
 {
-    public function create(int $articleId, $title)
+
+    /**
+     * @param string $index
+     * @param string $type
+     * @param int $id
+     * @param array $data
+     */
+    public function create(string $index,string $type,int $id,array $data)
     {
-        var_dump($articleId);
+        $host = env('ES_HOST','');
+
         $build = ClientBuilder::create();
 
         if (Coroutine::getCid() > 0) {
@@ -32,17 +43,20 @@ class ElasticSearch extends Service
             ]);
             $build->setHandler($handler);
         }
-        $client = $build->setHosts(['http://139.9.164.21:9200'])->build();
+        $client = $build->setHosts([$host])->build();
         $params = [
-            'id' => $articleId,
-            'index' => 'hyperf',
-            'type' => 'article',
-            'body' => ['id' => $articleId, 'title' => $title],
+            'id' => $id,
+            'index' => $index,
+            'type' => $type,
+            'body' => $data,
         ];
         $client->create($params);
     }
 
-    public function search()
+    public function search(string $index,string $type)
     {
+        $data['index'] = $index;
+        $data['type'] = $type;
+
     }
 }
