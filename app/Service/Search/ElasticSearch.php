@@ -14,24 +14,14 @@ namespace App\Service\Search;
 
 use App\Service\Service;
 use Elasticsearch\ClientBuilder;
-use Hyperf\Config\Annotation\Value;
-use Hyperf\Di\Annotation\Inject;
 use Hyperf\Guzzle\RingPHP\CoroutineHandler;
-use Psr\Container\ContainerInterface;
 use Swoole\Coroutine;
 
 class ElasticSearch extends Service
 {
-
-    /**
-     * @param string $index
-     * @param string $type
-     * @param int $id
-     * @param array $data
-     */
-    public function create(string $index,string $type,int $id,array $data)
+    public function client()
     {
-        $host = env('ES_HOST','');
+        $host = env('ES_HOST', '');
 
         $build = ClientBuilder::create();
 
@@ -43,20 +33,41 @@ class ElasticSearch extends Service
             ]);
             $build->setHandler($handler);
         }
-        $client = $build->setHosts([$host])->build();
+        return $build->setHosts([$host])->build();
+    }
+
+    /**
+     * @param string $index
+     * @param string $type
+     * @param int $id
+     * @param array $data
+     */
+    public function create(string $index, string $type, int $id, array $data)
+    {
+        $client = $this->client();
+
         $params = [
             'id' => $id,
             'index' => $index,
             'type' => $type,
             'body' => $data,
         ];
+
         $client->create($params);
     }
 
-    public function search(string $index,string $type)
+    public function search(string $index, string $type, int $offset, int $limit)
     {
-        $data['index'] = $index;
-        $data['type'] = $type;
+        $client = $this->client();
 
+        $params = [
+            'index' => $index,
+            'type' => $type,
+            'body' => [],
+            'size' => $offset,
+            'from' => $limit,
+        ];
+
+        return [$client->search($params), $client->info()];
     }
 }
