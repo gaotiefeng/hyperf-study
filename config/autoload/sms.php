@@ -21,13 +21,17 @@ return [
         'strategy' => OrderStrategy::class,
         // 默认可用的发送网关
         'gateways' => [
-            'huawei',
+            'baidu',
         ],
     ],
 
     // 可用的网关配置
     'gateways' => [
         'huawei' => [
+
+        ],
+        'baidu' => [
+
         ],
     ],
 ];
