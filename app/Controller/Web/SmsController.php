@@ -31,14 +31,13 @@ class SmsController extends Controller
 
     public function send()
     {
-
         $captchaCode = $this->request->input('code',1234);
         $mobile = $this->request->input('mobile');
         $code = rand(100000, 999999);
 
-        /*if (! $this->captcha->check($captchaCode, $code)) {
+        if (! $this->captcha->check($captchaCode, $code)) {
             throw new BusinessException(ErrorCode::CAPTCHA_NO_EXIST);
-        }*/
+        }
 
         di()->get(SmsRedis::class)->set($mobile, $code);
 

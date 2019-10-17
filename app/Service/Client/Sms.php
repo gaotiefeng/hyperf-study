@@ -20,15 +20,19 @@ use Overtrue\EasySms\Strategies\OrderStrategy;
 
 class Sms extends Service
 {
+    /**
+     * @Value(key="sms")
+     * @var array
+     */
     protected $config;
 
     public function sendSms($mobile, $code)
     {
-        $this->config = $this->container->get(ConfigInterface::class);
+/*        $this->config = $this->container->get(ConfigInterface::class);
 
-        $config = $this->config->get('sms');
+        $config = $this->config->get('sms');*/
 
-        $easySms = new EasySms($config);
+        $easySms = new EasySms($this->config);
 
         $easySms->send($mobile, [
             'template' => '',

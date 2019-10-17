@@ -22,3 +22,5 @@ Runtime::enableCoroutine(true);
 require BASE_PATH . '/vendor/autoload.php';
 
 require BASE_PATH . '/config/container.php';
+
+$application = $container->get(\Hyperf\Contract\ApplicationInterface::class);
