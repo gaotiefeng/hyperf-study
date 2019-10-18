@@ -33,7 +33,7 @@ class ElasticSearch extends Service
             ]);
             $build->setHandler($handler);
         }
-        return $build->setHosts([$host])->build();
+        return $build->setHosts([$host])->setRetries(2)->build();
     }
 
     /**
@@ -56,6 +56,7 @@ class ElasticSearch extends Service
 
             $client->update($params);
         } catch (\Exception $exception) {
+            $this->logger->error('DOC UPDATE elasticSearch is error' . $exception->getMessage());
             var_dump($exception->getMessage());
         }
     }
@@ -68,24 +69,32 @@ class ElasticSearch extends Service
             $params = [
                 'index' => $index,
                 'type' => $type,
+                'body' => [ 'query' => ['match' => ['title' => '你知道']]],
                 'size' => $offset,
                 'from' => $limit,
             ];
 
-            return [$client->search($params), $client->info()];
+            return $client->search($params);
         } catch (\Exception $exception) {
-            $this->logger->error('elasticSearch is error' . $exception->getMessage());
+            $this->logger->error('SEARCH elasticSearch is error' . $exception->getMessage());
         }
     }
 
-    public function delete($index)
+    public function delete($index,$type,$id)
     {
         try {
-            $client = $this->client();
 
-            $client->delete(['index' => $index]);
-        } catch (\Exception $e) {
-            var_dump($e->getMessage());
+            $client = $this->client();
+            $param = [
+                'index' => $index,
+                'type' => $type,
+                'id' => $id,
+            ];
+
+            return $client->delete($param);
+        } catch (\Exception $exception) {
+            $this->logger->error('DELETE elasticSearch is error' . $exception->getMessage());
+            var_dump($exception->getMessage());
         }
     }
 }
