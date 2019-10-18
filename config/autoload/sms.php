@@ -28,10 +28,8 @@ return [
     // 可用的网关配置
     'gateways' => [
         'huawei' => [
-
         ],
         'baidu' => [
-
         ],
     ],
 ];

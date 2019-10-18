@@ -15,7 +15,6 @@ namespace App\Service\Search;
 use App\Service\Service;
 use Elasticsearch\ClientBuilder;
 use Hyperf\Guzzle\RingPHP\CoroutineHandler;
-use Psr\Container\ContainerInterface;
 use Swoole\Coroutine;
 
 class ElasticSearch extends Service
@@ -45,16 +44,20 @@ class ElasticSearch extends Service
      */
     public function create(string $index, string $type, int $id, array $data)
     {
-        $client = $this->client();
+        try {
+            $client = $this->client();
 
-        $params = [
-            'id' => $id,
-            'index' => $index,
-            'type' => $type,
-            'body' => $data,
-        ];
+            $params = [
+                'id' => $id,
+                'index' => $index,
+                'type' => $type,
+                'body' => ['doc' => $data],
+            ];
 
-        $client->create($params);
+            $client->update($params);
+        } catch (\Exception $exception) {
+            var_dump($exception->getMessage());
+        }
     }
 
     public function search(string $index, string $type, int $offset, int $limit)
@@ -70,9 +73,19 @@ class ElasticSearch extends Service
             ];
 
             return [$client->search($params), $client->info()];
+        } catch (\Exception $exception) {
+            $this->logger->error('elasticSearch is error' . $exception->getMessage());
+        }
+    }
 
-        }catch (\Exception $exception){
-            $this->logger->error('elasticSearch is error'. $exception->getMessage());
-        };
+    public function delete($index)
+    {
+        try {
+            $client = $this->client();
+
+            $client->delete(['index' => $index]);
+        } catch (\Exception $e) {
+            var_dump($e->getMessage());
+        }
     }
 }

@@ -79,9 +79,9 @@ class ArticleBiz extends Service
 
         di()->get(ElasticSearch::class)->create('gin', 'article', $model->id, $data);
 
-        $es = di()->get(ElasticSearch::class)->search('gin', 'article', 0, 20);
+        //$es = di()->get(ElasticSearch::class)->search('gin', 'article', 0, 20);
 
-        var_dump($es);
+        di()->get(ElasticSearch::class)->delete('gin');
 
         return $model;
     }

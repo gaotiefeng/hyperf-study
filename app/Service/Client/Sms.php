@@ -16,7 +16,6 @@ use App\Service\Service;
 use Hyperf\Config\Annotation\Value;
 use Hyperf\Contract\ConfigInterface;
 use Overtrue\EasySms\EasySms;
-use Overtrue\EasySms\Strategies\OrderStrategy;
 
 class Sms extends Service
 {
@@ -28,16 +27,16 @@ class Sms extends Service
 
     public function sendSms($mobile, $code)
     {
-/*        $this->config = $this->container->get(ConfigInterface::class);
-
-        $config = $this->config->get('sms');*/
+        /*        $this->config = $this->container->get(ConfigInterface::class);
+        
+                $config = $this->config->get('sms');*/
 
         $easySms = new EasySms($this->config);
 
         $easySms->send($mobile, [
             'template' => '',
             'data' => [
-                'code' => '验证码:'.$code,
+                'code' => '验证码:' . $code,
             ],
         ]);
     }
