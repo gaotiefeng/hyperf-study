@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-use Carbon\Carbon;
 use Hyperf\DbConnection\Model\Model;
 
 /**
@@ -20,8 +19,8 @@ use Hyperf\DbConnection\Model\Model;
  * @property string $user_name
  * @property string $mobile
  * @property string $password
- * @property Carbon $created_at
- * @property Carbon $updated_at
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  */
 class Admin extends Model
 {

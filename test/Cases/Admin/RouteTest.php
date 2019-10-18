@@ -33,9 +33,11 @@ class RouteTest extends HttpTestCase
     public function testAdminRouteSave()
     {
         $res = $this->adminClient->post('/route/save', [
-            'name' => '12321',
-            'icon' => 'ads',
+            'name' => '添加路由',
+            'icon' => '',
             'route' => '/route/save',
+            'method' => 'get',
+            'read' => 1,
         ]);
 
         $this->assertSame(0, $res['code']);

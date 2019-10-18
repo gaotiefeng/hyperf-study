@@ -53,6 +53,8 @@ class RouteDao extends Service
         $model->name = $data['name'];
         $model->icon = $data['icon'];
         $model->route = $data['route'];
+        $model->method = $data['method'];
+        $model->is_read = $data['read'];
 
         return $model->save();
     }

@@ -12,16 +12,17 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-use Carbon\Carbon;
 use Hyperf\DbConnection\Model\Model;
 
 /**
  * @property int $id
  * @property string $route
  * @property string $name
+ * @property string $method
  * @property string $icon
- * @property Carbon $created_at
- * @property Carbon $updated_at
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property int $is_read
  */
 class Route extends Model
 {
@@ -44,5 +45,5 @@ class Route extends Model
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime', 'is_read' => 'integer'];
 }

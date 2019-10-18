@@ -131,6 +131,8 @@ CREATE TABLE `route` (
   `icon` varchar(64) NOT NULL DEFAULT '',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
+  `method` varchar(12) NOT NULL DEFAULT '',
+  `is_read` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

@@ -15,10 +15,10 @@ namespace App\Controller\Admin;
 use App\Constants\ErrorCode;
 use App\Controller\Controller;
 use App\Exception\BusinessException;
+use App\Request\admin\RouteRequest;
 use App\Service\Biz\Admin\RouteBiz;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Validation\Contract\ValidatorFactoryInterface;
-use Inhere\Validate\Validation;
 
 class RouteController extends Controller
 {
@@ -61,19 +61,13 @@ class RouteController extends Controller
         return $this->response->success($result);
     }
 
-    public function save()
+    /**
+     * @param RouteRequest $request
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function save(RouteRequest $request)
     {
-        $input = $this->request->all();
-
-        $validation = Validation::check($input, [
-            [['name', 'icon', 'route'], 'required'],
-        ]);
-
-        if (! $validation->isOk()) {
-            throw new BusinessException(ErrorCode::SERVER_ERROR, $validation->firstError());
-        }
-
-        $data = $validation->getSafeData();
+        $data = $request->all();
 
         $result = $this->biz->save($data);
 
