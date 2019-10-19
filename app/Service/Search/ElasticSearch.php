@@ -47,6 +47,7 @@ class ElasticSearch extends Service
         try {
             $client = $this->client();
 
+            //TODO 'client' => [ 'ignore' => [400, 404] 忽略多个http状态码,'verbose' => true 返回头部 状态吗]
             $params = [
                 'id' => $id,
                 'index' => $index,
