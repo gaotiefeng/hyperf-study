@@ -16,7 +16,6 @@ use App\Model\Article;
 use App\Service\Dao\ArticleDao;
 use App\Service\Dao\ArticleUserDao;
 use App\Service\Formatter\ArticleFormatter;
-use App\Service\Search\ElasticSearch;
 use App\Service\Service;
 use Hyperf\Di\Annotation\Inject;
 
@@ -76,12 +75,6 @@ class ArticleBiz extends Service
 
         $data['id'] = $model->id;
         $data['user_id'] = $userId;
-
-        di()->get(ElasticSearch::class)->create('gin', 'article', $model->id, $data);
-
-        //$es = di()->get(ElasticSearch::class)->search('gin', 'article', 0, 20);
-
-        di()->get(ElasticSearch::class)->delete('gin');
 
         return $model;
     }

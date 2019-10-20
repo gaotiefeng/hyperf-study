@@ -12,13 +12,40 @@ declare(strict_types=1);
 
 namespace App\Service\Search;
 
-use App\Service\Service;
 use Elasticsearch\ClientBuilder;
+use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Guzzle\RingPHP\CoroutineHandler;
+use Psr\Container\ContainerInterface;
 use Swoole\Coroutine;
 
-class ElasticSearch extends Service
+class ElasticSearch
 {
+    /**
+     * @var StdoutLoggerInterface
+     */
+    protected $logger;
+
+    /**
+     * @var ContainerInterface
+     */
+    protected $container;
+
+    protected $index;
+
+    protected $type;
+
+    protected $id;
+
+    public function __construct($index, $type, $id, ContainerInterface $container)
+    {
+        $this->container = $container;
+
+        $this->logger = $container->get(StdoutLoggerInterface::class);
+        $this->index = $index;
+        $this->type = $type;
+        $this->id = $id;
+    }
+
     public function client()
     {
         $host = env('ES_HOST', '');
@@ -36,41 +63,37 @@ class ElasticSearch extends Service
         return $build->setHosts([$host])->setRetries(2)->build();
     }
 
-    /**
-     * @param string $index
-     * @param string $type
-     * @param int $id
-     * @param array $data
-     */
-    public function create(string $index, string $type, int $id, array $data)
+    public function create(array $data)
     {
         try {
             $client = $this->client();
 
             //TODO 'client' => [ 'ignore' => [400, 404] 忽略多个http状态码,'verbose' => true 返回头部 状态吗]
             $params = [
-                'id' => $id,
-                'index' => $index,
-                'type' => $type,
+                'index' => $this->index,
+                'type' => $this->type,
+                'id' => $this->id,
                 'body' => ['doc' => $data],
             ];
 
-            $client->update($params);
+            $client->create($params);
         } catch (\Exception $exception) {
             $this->logger->error('DOC UPDATE elasticSearch is error' . $exception->getMessage());
             var_dump($exception->getMessage());
         }
     }
 
-    public function search(string $index, string $type, int $offset, int $limit)
+    //TODO Match 查询
+    public function search(int $offset, int $limit)
     {
         try {
             $client = $this->client();
 
             $params = [
-                'index' => $index,
-                'type' => $type,
-                'body' => [ 'query' => ['match' => ['title' => '你知道']]],
+                'index' => $this->index,
+                'type' => $this->type,
+                'id' => $this->id,
+                'body' => ['query' => ['match' => ['title' => '你知道']]],
                 'size' => $offset,
                 'from' => $limit,
             ];
@@ -81,21 +104,82 @@ class ElasticSearch extends Service
         }
     }
 
-    public function delete($index,$type,$id)
+    public function delete()
     {
         try {
-
             $client = $this->client();
             $param = [
-                'index' => $index,
-                'type' => $type,
-                'id' => $id,
+                'index' => $this->index,
+                'type' => $this->type,
+                'id' => $this->id,
             ];
 
             return $client->delete($param);
         } catch (\Exception $exception) {
             $this->logger->error('DELETE elasticSearch is error' . $exception->getMessage());
             var_dump($exception->getMessage());
+        }
+    }
+
+    /**
+     * 知道当前索引配置参数.
+     * @param array $index = ['index','index1']
+     * @return array
+     */
+    public function getSettings(array $index)
+    {
+        try {
+            $client = $this->client();
+
+            $params = ['index' => $index];
+
+            return $client->indices()->getSettings($params);
+        } catch (\Exception $exception) {
+            $this->logger->error('elasticSearch getSetting is error' . $exception->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * 获取单一文档.
+     * @return array
+     */
+    public function get()
+    {
+        try {
+            $client = $this->client();
+
+            $params = [
+                'index' => $this->index,
+                'type' => $this->type,
+                'id' => $this->id,
+            ];
+
+            return $client->get($params);
+        } catch (\Exception $exception) {
+            $this->logger->error('elasticSearch get is error' . $exception->getMessage());
+        }
+    }
+
+    /**
+     * 'body' => ['script' => 'ctx._source.counter += count','params' => ['count' => 4],.
+     *
+     * @return array
+     */
+    public function update()
+    {
+        try {
+            $client = $this->client();
+
+            $params = [
+                'index' => $this->index,
+                'type' => $this->type,
+                'id' => $this->id,
+            ];
+
+            return $client->update($params);
+        } catch (\Exception $exception) {
+            $this->logger->error('elasticSearch update is error' . $exception->getMessage());
         }
     }
 }
