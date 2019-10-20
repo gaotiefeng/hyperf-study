@@ -13,6 +13,7 @@ declare(strict_types=1);
 use App\Middleware\CorsMiddleware;
 use App\Middleware\DebugMiddleware;
 use App\Middleware\UserAuthMiddleware;
+use \App\Middleware\AdminAuthMiddleware;
 
 return [
     'http' => [
@@ -23,5 +24,6 @@ return [
     'admin' => [
         CorsMiddleware::class,
         DebugMiddleware::class,
+        AdminAuthMiddleware::class,
     ],
 ];

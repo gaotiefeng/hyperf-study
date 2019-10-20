@@ -18,7 +18,7 @@ use App\Model\Admin;
 use App\Service\Dao\AdminDao;
 use App\Service\Formatter\admin\AdminFormatter;
 use App\Service\Service;
-use App\Untils\JwtAuth;
+use App\Untils\AdminAuth;
 use Hyperf\Di\Annotation\Inject;
 
 class UserBiz extends Service
@@ -48,7 +48,7 @@ class UserBiz extends Service
 
         $result = [];
         $result['mobile'] = $data['mobile'];
-        $result['token'] = JwtAuth::instance()->init($model->id)->getToken();
+        $result['token'] = AdminAuth::instance()->init($model->id)->getToken();
 
         return $result;
     }

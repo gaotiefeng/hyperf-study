@@ -16,6 +16,7 @@ use App\Constants\ErrorCode;
 use App\Controller\Controller;
 use App\Exception\BusinessException;
 use App\Service\Biz\Admin\AdminBiz;
+use App\Untils\AdminAuth;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Validation\Contract\ValidatorFactoryInterface;
 
@@ -35,6 +36,8 @@ class AdminController extends Controller
 
     public function index()
     {
+        $adminId = AdminAuth::instance()->build()->getUserId();
+        echo $adminId;
         $input = $this->request->all();
 
         $message = [

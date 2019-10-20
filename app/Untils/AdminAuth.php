@@ -10,17 +10,9 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
 
-namespace App\Constants;
+namespace App\Untils;
 
-use Hyperf\Constants\AbstractConstants;
-
-class Constants extends AbstractConstants
+class AdminAuth extends JwtAuth
 {
-    const AUTH_TOKEN = 'Auth-Token';
-
-    const ADMIN_TOKEN = 'Admin-Token';
-
-    const options = [
-        'cost' => 11,
-    ];
+    protected $key = 'Admin-Token';
 }
