@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace App\Kernel\Http;
 
+use Hyperf\HttpMessage\Cookie\Cookie;
 use Hyperf\HttpServer\Contract\ResponseInterface;
 use Hyperf\Utils\Context;
 use Psr\Container\ContainerInterface;
@@ -49,6 +50,20 @@ class Response
             'code' => $code,
             'message' => $message,
         ]);
+    }
+
+    public function redirect($url, $status = 302)
+    {
+        return $this->response()
+            ->withAddedHeader('Location', (string) $url)
+            ->withStatus($status);
+    }
+
+    public function cookie(Cookie $cookie)
+    {
+        $response = $this->response()->withCookie($cookie);
+        Context::set(PsrResponseInterface::class, $response);
+        return $this;
     }
 
     /**

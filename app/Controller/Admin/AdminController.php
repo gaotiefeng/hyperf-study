@@ -37,7 +37,7 @@ class AdminController extends Controller
     public function index()
     {
         $adminId = AdminAuth::instance()->build()->getUserId();
-        echo $adminId;
+
         $input = $this->request->all();
 
         $message = [
