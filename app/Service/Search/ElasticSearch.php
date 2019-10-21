@@ -18,7 +18,7 @@ use Hyperf\Guzzle\RingPHP\CoroutineHandler;
 use Psr\Container\ContainerInterface;
 use Swoole\Coroutine;
 
-class ElasticSearch
+abstract class ElasticSearch
 {
     /**
      * @var StdoutLoggerInterface
