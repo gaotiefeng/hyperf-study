@@ -36,14 +36,11 @@ abstract class ElasticSearch
 
     protected $id;
 
-    public function __construct($index, $type, $id, ContainerInterface $container)
+    public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
 
         $this->logger = $container->get(StdoutLoggerInterface::class);
-        $this->index = $index;
-        $this->type = $type;
-        $this->id = $id;
     }
 
     public function client()
@@ -63,6 +60,43 @@ abstract class ElasticSearch
         return $build->setHosts([$host])->setRetries(2)->build();
     }
 
+    public function putMapping()
+    {
+        try {
+            $client = $this->client();
+            $params = [
+                'index' => $this->index,
+                'type' => $this->type,
+                'body' => [
+                    $this->type => [
+                        '_source' => [
+                            'enabled' => true
+                        ],
+                        'properties' => [
+                            'id' => [
+                                'type' => 'integer'
+                            ],
+                            'title' => [
+                                'type' => 'text',
+                                'analyzer' => 'ik_max_word'
+                            ],
+                            'content' => [
+                                'type' => 'text',
+                                'analyzer' => 'ik_max_word'
+                            ],
+                            'user_id' => [
+                                'type' => 'integer'
+                            ]
+                        ]
+                    ]
+                ]
+            ];
+            $client->indices()->putMapping($params);
+        } catch (\Exception $exception) {
+            $this->logger->error('DOC UPDATE elasticSearch is error' . $exception->getMessage());
+            var_dump($exception->getMessage());
+        }
+    }
     public function create(array $data)
     {
         try {
@@ -84,19 +118,19 @@ abstract class ElasticSearch
     }
 
     //TODO Match 查询
-    public function search(int $offset, int $limit)
+    public function search(array $params)
     {
         try {
             $client = $this->client();
 
-            $params = [
+            /*$params = [
                 'index' => $this->index,
                 'type' => $this->type,
                 'id' => $this->id,
                 'body' => ['query' => ['match' => ['title' => '你知道']]],
                 'size' => $offset,
                 'from' => $limit,
-            ];
+            ];*/
 
             return $client->search($params);
         } catch (\Exception $exception) {

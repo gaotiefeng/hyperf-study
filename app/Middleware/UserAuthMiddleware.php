@@ -34,7 +34,7 @@ class UserAuthMiddleware implements MiddlewareInterface
         $auth = JwtAuth::instance()->reload($token);
 
         if (! $auth->check()) {
-            throw new  BusinessException(ErrorCode::ADMIN_EXITS);
+            //throw new  BusinessException(ErrorCode::ADMIN_EXITS);
             $auth->init(1);
         }
 

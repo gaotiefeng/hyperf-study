@@ -16,6 +16,7 @@ use App\Model\Article;
 use App\Service\Dao\ArticleDao;
 use App\Service\Dao\ArticleUserDao;
 use App\Service\Formatter\ArticleFormatter;
+use App\Service\Search\ArticleSearch;
 use App\Service\Service;
 use Hyperf\Di\Annotation\Inject;
 
@@ -75,6 +76,10 @@ class ArticleBiz extends Service
 
         $data['id'] = $model->id;
         $data['user_id'] = $userId;
+        di()->get(ArticleSearch::class)->articleAdd($data);
+
+        $result = di()->get(ArticleSearch::class)->articleSearch();
+        var_dump($result);
 
         return $model;
     }
