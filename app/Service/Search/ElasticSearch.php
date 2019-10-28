@@ -70,26 +70,26 @@ abstract class ElasticSearch
                 'body' => [
                     $this->type => [
                         '_source' => [
-                            'enabled' => true
+                            'enabled' => true,
                         ],
                         'properties' => [
                             'id' => [
-                                'type' => 'integer'
+                                'type' => 'integer',
                             ],
                             'title' => [
                                 'type' => 'text',
-                                'analyzer' => 'ik_max_word'
+                                'analyzer' => 'ik_max_word',
                             ],
                             'content' => [
                                 'type' => 'text',
-                                'analyzer' => 'ik_max_word'
+                                'analyzer' => 'ik_max_word',
                             ],
                             'user_id' => [
-                                'type' => 'integer'
-                            ]
-                        ]
-                    ]
-                ]
+                                'type' => 'integer',
+                            ],
+                        ],
+                    ],
+                ],
             ];
             $client->indices()->putMapping($params);
         } catch (\Exception $exception) {
@@ -97,6 +97,7 @@ abstract class ElasticSearch
             var_dump($exception->getMessage());
         }
     }
+
     public function create(array $data)
     {
         try {

@@ -45,7 +45,7 @@ class Article extends Model
      *
      * @var array
      */
-    protected $casts = ['id' => 'integer', 'user_id' => 'integer', 'likes' => 'integer', 'page_views' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
+    protected $casts = ['id' => 'int', 'user_id' => 'integer', 'likes' => 'integer', 'page_views' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 
     public function user()
     {

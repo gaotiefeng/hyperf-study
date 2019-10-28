@@ -10,10 +10,10 @@ declare(strict_types=1);
  * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
  */
 
+use App\Middleware\AdminAuthMiddleware;
 use App\Middleware\CorsMiddleware;
 use App\Middleware\DebugMiddleware;
 use App\Middleware\UserAuthMiddleware;
-use \App\Middleware\AdminAuthMiddleware;
 
 return [
     'http' => [
