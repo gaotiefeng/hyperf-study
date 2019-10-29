@@ -77,10 +77,6 @@ class ArticleBiz extends Service
         $data['id'] = $model->id;
         $data['user_id'] = $userId;
 
-        di()->get(ArticleSearch::class)->articleAdd($data);
-
-        var_dump(di()->get(ArticleSearch::class)->articleSearch());
-
         return $model;
     }
 }

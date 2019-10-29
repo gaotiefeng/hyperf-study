@@ -41,8 +41,17 @@ class ArticleSearch extends ElasticSearch
         return $arr;
     }
 
-    public function articleDelete()
+    public function getArticle($data)
     {
+        $this->id = $data['id'];
 
+        return $this->get();
+    }
+
+    public function articleDelete($id)
+    {
+        $this->id = $id;
+
+        return $this->delete();
     }
 }
