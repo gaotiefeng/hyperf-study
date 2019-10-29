@@ -76,10 +76,10 @@ class ArticleBiz extends Service
 
         $data['id'] = $model->id;
         $data['user_id'] = $userId;
+
         di()->get(ArticleSearch::class)->articleAdd($data);
 
-        $result = di()->get(ArticleSearch::class)->articleSearch();
-        var_dump($result);
+        var_dump(di()->get(ArticleSearch::class)->articleSearch());
 
         return $model;
     }

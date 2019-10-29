@@ -29,22 +29,20 @@ class ArticleSearch extends ElasticSearch
 
     public function articleSearch()
     {
-        $params = [
-            'index' => 'article',
-            'type' => 'index',
-            'body' => [
-                'query' => [
-                    'match' => [
-                        'content' => '你选的吗',
-                    ],
-                ],
-            ],
+        $query = [
+            'title' => "nihao"
         ];
-        return $this->search($params);
-        /*$milliseconds = $results['took'];
-        $maxScore     = $results['hits']['max_score'];
 
-        $score = $results['hits']['hits'][0]['_score'];
-        $doc   = $results['hits']['hits'][0]['_source'];*/
+        $result = $this->search($query);
+
+        $arr['total'] = $result['hits']['total'];
+        $arr['items'] = $result['hits']['hits'];
+
+        return $arr;
+    }
+
+    public function articleDelete()
+    {
+
     }
 }

@@ -62,40 +62,7 @@ abstract class ElasticSearch
 
     public function putMapping()
     {
-        try {
-            $client = $this->client();
-            $params = [
-                'index' => $this->index,
-                'type' => $this->type,
-                'body' => [
-                    $this->type => [
-                        '_source' => [
-                            'enabled' => true,
-                        ],
-                        'properties' => [
-                            'id' => [
-                                'type' => 'integer',
-                            ],
-                            'title' => [
-                                'type' => 'text',
-                                'analyzer' => 'ik_max_word',
-                            ],
-                            'content' => [
-                                'type' => 'text',
-                                'analyzer' => 'ik_max_word',
-                            ],
-                            'user_id' => [
-                                'type' => 'integer',
-                            ],
-                        ],
-                    ],
-                ],
-            ];
-            $client->indices()->putMapping($params);
-        } catch (\Exception $exception) {
-            $this->logger->error('DOC UPDATE elasticSearch is error' . $exception->getMessage());
-            var_dump($exception->getMessage());
-        }
+
     }
 
     public function create(array $data)
@@ -108,30 +75,28 @@ abstract class ElasticSearch
                 'index' => $this->index,
                 'type' => $this->type,
                 'id' => $this->id,
-                'body' => ['doc' => $data],
+                'body' => $data,
             ];
 
             $client->create($params);
         } catch (\Exception $exception) {
             $this->logger->error('DOC UPDATE elasticSearch is error' . $exception->getMessage());
-            var_dump($exception->getMessage());
         }
     }
 
-    //TODO Match 查询
-    public function search(array $params)
+    //TODO 查询 "query" : {
+    //      "term" : { "user_id" : "1" }
+    //    }
+    public function search(array $query)
     {
         try {
             $client = $this->client();
 
-            /*$params = [
+            $params = [
                 'index' => $this->index,
                 'type' => $this->type,
-                'id' => $this->id,
-                'body' => ['query' => ['match' => ['title' => '你知道']]],
-                'size' => $offset,
-                'from' => $limit,
-            ];*/
+                'body' => ['query' => ['term' => $query]],
+            ];
 
             return $client->search($params);
         } catch (\Exception $exception) {
@@ -152,7 +117,6 @@ abstract class ElasticSearch
             return $client->delete($param);
         } catch (\Exception $exception) {
             $this->logger->error('DELETE elasticSearch is error' . $exception->getMessage());
-            var_dump($exception->getMessage());
         }
     }
 

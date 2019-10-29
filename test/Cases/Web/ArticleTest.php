@@ -43,8 +43,8 @@ class ArticleTest extends HttpTestCase
     public function testWebArticleSave()
     {
         $res = $this->client->post('/article/save', [
-            'title' => '你知道这五年我怎么过的吗',
-            'content' => '你选的吗',
+            'title' => 'wen章',
+            'content' => 'Hadoop',
         ]);
 
         $this->assertSame(0, $res['code']);
