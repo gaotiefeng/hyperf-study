@@ -30,7 +30,7 @@ class ArticleSearch extends ElasticSearch
     public function articleSearch()
     {
         $query = [
-            'title' => "nihao"
+            'title' => 'nihao',
         ];
 
         $result = $this->search($query);

@@ -14,7 +14,7 @@
     "require": {
         "php": ">=7.2",
         "ext-swoole": ">=4.4",
-        "hyperf/cache": "~1.1.0",
+        "hyperf/cache": "^1.1",
         "hyperf/command": "~1.1.0",
         "hyperf/config": "~1.1.0",
         "hyperf/contract": "~1.1.0",

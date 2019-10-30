@@ -51,4 +51,12 @@ class RouteTest extends HttpTestCase
 
         $this->assertSame(0, $res['code']);
     }
+
+    public function testAdminRouteAll()
+    {
+        $res = $this->adminClient->post('/route/all', [
+        ]);
+
+        $this->assertSame(0, $res['code']);
+    }
 }

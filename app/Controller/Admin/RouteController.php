@@ -17,6 +17,7 @@ use App\Controller\Controller;
 use App\Exception\BusinessException;
 use App\Request\admin\RouteRequest;
 use App\Service\Biz\Admin\RouteBiz;
+use App\Service\Cache\RouteCache;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\Validation\Contract\ValidatorFactoryInterface;
 
@@ -83,6 +84,13 @@ class RouteController extends Controller
         }
 
         $result = $this->biz->delete($id);
+
+        return $this->response->success($result);
+    }
+
+    public function all()
+    {
+        $result = di()->get(RouteCache::class)->getRoute();
 
         return $this->response->success($result);
     }

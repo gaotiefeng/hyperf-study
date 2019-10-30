@@ -63,6 +63,10 @@ class AdminController extends Controller
         return $this->response->success($result);
     }
 
+    public function save()
+    {
+    }
+
     /**
      * @return int|mixed
      */

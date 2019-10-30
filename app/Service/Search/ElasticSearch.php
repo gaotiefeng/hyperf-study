@@ -62,7 +62,6 @@ abstract class ElasticSearch
 
     public function putMapping()
     {
-
     }
 
     public function create(array $data)

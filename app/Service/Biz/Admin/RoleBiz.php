@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace App\Service\Biz\Admin;
 
 use App\Service\Dao\RoleDao;
+use App\Service\Dao\RouteDao;
 use App\Service\Formatter\admin\RoleFormatter;
 use App\Service\Service;
 use Hyperf\Di\Annotation\Inject;
@@ -40,6 +41,8 @@ class RoleBiz extends Service
 
     public function save(array $data)
     {
+        di()->get(RouteDao::class)->first($data['route_id']);
+
         return $this->dao->save($data);
     }
 }

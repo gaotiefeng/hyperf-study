@@ -16,7 +16,6 @@ use App\Model\Article;
 use App\Service\Dao\ArticleDao;
 use App\Service\Dao\ArticleUserDao;
 use App\Service\Formatter\ArticleFormatter;
-use App\Service\Search\ArticleSearch;
 use App\Service\Service;
 use Hyperf\Di\Annotation\Inject;
 

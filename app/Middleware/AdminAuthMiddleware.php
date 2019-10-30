@@ -16,6 +16,7 @@ use App\Constants\Constants;
 use App\Constants\ErrorCode;
 use App\Exception\BusinessException;
 use App\Untils\AdminAuth;
+use Hyperf\Config\Annotation\Value;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -23,6 +24,11 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class AdminAuthMiddleware implements MiddlewareInterface
 {
+    /**
+     * @Value(key="debug")
+     */
+    protected $debug;
+
     protected $urls = [
         '/user/login',
     ];
@@ -37,8 +43,8 @@ class AdminAuthMiddleware implements MiddlewareInterface
         if (! in_array($getUrl, $this->urls)) {
             $auth = AdminAuth::instance()->reload($token);
 
-            if (! $auth->check()) {
-                throw new  BusinessException(ErrorCode::TOKEN_NOT_EXITS);
+            if (! $auth->check() && $this->debug) {
+                //throw new  BusinessException(ErrorCode::TOKEN_NOT_EXITS);
                 $auth->init(1);
             }
         }

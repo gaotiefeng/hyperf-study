@@ -12,9 +12,13 @@ declare(strict_types=1);
 
 namespace App\Service\Dao;
 
+use App\Constants\ErrorCode;
+use App\Exception\BusinessException;
 use App\Kernel\Helper\ModelHelper;
 use App\Model\Role;
+use App\Model\RoleRoute;
 use App\Service\Service;
+use Hyperf\DbConnection\Db;
 
 class RoleDao extends Service
 {
@@ -27,13 +31,29 @@ class RoleDao extends Service
 
     /**
      * @param array $data
-     * @return bool
+     * @return Role
      */
     public function save(array $data)
     {
-        $model = new Role();
-        $model->name = $data['name'];
+        Db::beginTransaction();
+        try {
+            $model = new Role();
+            $model->name = $data['name'];
 
-        return $model->save();
+            $model->save();
+
+            $roleRoute = new RoleRoute();
+            $roleRoute->role_id = $model->id;
+            $roleRoute->route_id = $data['route_id'];
+
+            $roleRoute->save();
+            Db::commit();
+        } catch (\Exception $e) {
+            Db::rollBack();
+            $this->logger->error('role add' . $e->getMessage());
+            throw new BusinessException(ErrorCode::SERVER_ERROR);
+        }
+
+        return $model;
     }
 }

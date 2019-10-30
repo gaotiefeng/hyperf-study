@@ -29,7 +29,7 @@ class RouteDao extends Service
     {
         $model = Route::query()->find($id);
 
-        if (! $throw || empty($model)) {
+        if (empty($model) && $throw) {
             throw new BusinessException(ErrorCode::SERVER_ERROR);
         }
 
