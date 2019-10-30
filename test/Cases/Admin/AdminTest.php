@@ -38,4 +38,16 @@ class AdminTest extends HttpTestCase
 
         $this->assertSame(0, $res['code']);
     }
+
+    public function testAdminSave()
+    {
+        $res = $this->adminClient->post('/admin/save', [
+            'mobile' => '15904436899',
+            'user_name' => 'test',
+            'role_id' => 1,
+            'password' => '123456',
+        ]);
+
+        $this->assertSame(0, $res['code']);
+    }
 }

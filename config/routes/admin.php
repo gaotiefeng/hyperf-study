@@ -16,6 +16,7 @@ Router::get('/', 'App\Controller\IndexController::index');
 
 Router::get('/admin/index', 'App\Controller\Admin\AdminController::index');
 Router::post('/admin/delete', 'App\Controller\Admin\AdminController::delete');
+Router::post('/admin/save', 'App\Controller\Admin\AdminController::save');
 
 Router::post('/route/save', 'App\Controller\Admin\RouteController::save');
 Router::get('/route/index', 'App\Controller\Admin\RouteController::index');

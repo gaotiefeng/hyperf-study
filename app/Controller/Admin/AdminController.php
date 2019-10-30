@@ -15,6 +15,7 @@ namespace App\Controller\Admin;
 use App\Constants\ErrorCode;
 use App\Controller\Controller;
 use App\Exception\BusinessException;
+use App\Request\AdminRequest;
 use App\Service\Biz\Admin\AdminBiz;
 use App\Untils\AdminAuth;
 use Hyperf\Di\Annotation\Inject;
@@ -63,8 +64,13 @@ class AdminController extends Controller
         return $this->response->success($result);
     }
 
-    public function save()
+    public function save(AdminRequest $request)
     {
+        $input = $request->all();
+
+        $result = $this->biz->save($input);
+
+        return $this->response->success($result);
     }
 
     /**

@@ -12,11 +12,14 @@ declare(strict_types=1);
 
 namespace App\Service\Dao;
 
+use App\Constants\Constants;
 use App\Constants\ErrorCode;
 use App\Exception\BusinessException;
 use App\Kernel\Helper\ModelHelper;
 use App\Model\Admin;
+use App\Model\AdminRole;
 use App\Service\Service;
+use Hyperf\DbConnection\Db;
 
 class AdminDao extends Service
 {
@@ -29,7 +32,7 @@ class AdminDao extends Service
     {
         $model = Admin::query()->find($id);
 
-        if ($throw && empty($model)) {
+        if (empty($model) && $throw) {
             throw new BusinessException(ErrorCode::ADMIN_NOT_EXITS);
         }
 
@@ -43,17 +46,46 @@ class AdminDao extends Service
         return ModelHelper::pagination($query, $offset, $limit);
     }
 
+    public function save(array $data)
+    {
+        Db::beginTransaction();
+        try {
+            $model = new Admin();
+            $model->user_name = $data['user_name'];
+            $model->mobile = $data['mobile'];
+            $options = Constants::options;
+            $model->password = password_hash($data['password'], PASSWORD_BCRYPT, $options);
+            $model->save();
+
+            $adminRole = new AdminRole();
+            $adminRole->role_id = $data['role_id'];
+            $adminRole->admin_id = $model->id;
+            $adminRole->save();
+            Db::commit();
+        } catch (\Exception $e) {
+            Db::rollBack();
+            $this->logger->error('admin save ' . $e->getMessage());
+            throw new BusinessException(ErrorCode::SERVER_ERROR);
+        }
+        return $model;
+    }
+
     /**
      * @param $mobile
      * @param bool $throw
-     * @return null|Model|object
+     * @param bool $is
+     * @return null|\Hyperf\Database\Model\Builder|\Hyperf\Database\Model\Model|object
      */
-    public function mobile($mobile, bool $throw = false)
+    public function mobile($mobile, bool $throw = false, $is = false)
     {
         $model = Admin::query()->where('mobile', '=', $mobile)->first();
 
-        if ($throw && empty($model)) {
+        if (empty($model) && $throw) {
             throw new BusinessException(ErrorCode::ADMIN_NOT_EXITS);
+        }
+
+        if (! empty($model) && $is) {
+            throw new BusinessException(ErrorCode::ADMIN_EXITS);
         }
 
         return $model;

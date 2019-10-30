@@ -40,6 +40,13 @@ class AdminBiz extends Service
         return $result;
     }
 
+    public function save(array $data)
+    {
+        $this->dao->mobile($data['mobile'], false, true);
+
+        return $this->dao->save($data);
+    }
+
     /**
      * @param int $id
      * @return int|mixed
