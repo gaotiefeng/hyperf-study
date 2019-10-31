@@ -36,6 +36,16 @@ return [
                 SwooleEvent::ON_REQUEST => ['AdminServer', 'onRequest'],
             ],
         ],
+        [
+            'name' => 'grpc',
+            'type' => Server::SERVER_HTTP,
+            'host' => '0.0.0.0',
+            'port' => 9523,
+            'sock_type' => SWOOLE_SOCK_TCP,
+            'callbacks' => [
+                SwooleEvent::ON_REQUEST => [\Hyperf\GrpcServer\Server::class, 'onRequest'],
+            ],
+        ],
     ],
     'settings' => [
         'enable_coroutine' => true,

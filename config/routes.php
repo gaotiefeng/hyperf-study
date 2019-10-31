@@ -18,6 +18,10 @@ Router::addServer('admin', function () {
     require __DIR__ . '/routes/admin.php';
 });
 
-Router::addServer('ws', function () {
-    Router::get('/', 'App\Controller\Ws\WebSocketController');
+Router::addServer('grpc', function () {
+
+    Router::addGroup('/grpc.hi', function () {
+        Router::post('/sayHello', 'App\Controller\Rpc\GrpcController@sayHello');
+    });
+
 });

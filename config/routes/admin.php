@@ -33,3 +33,6 @@ Router::get('/user/info', 'App\Controller\Admin\UserController::info');
 
 Router::get('/article/index', 'App\Controller\Admin\ArticleController::index');
 Router::get('/article/info', 'App\Controller\Admin\ArticleController::info');
+
+Router::get('/grpc/test', 'App\Controller\Rpc\GrpcClientController::hello');
+

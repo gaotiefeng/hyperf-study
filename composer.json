@@ -51,7 +51,9 @@
         "hyperf/circuit-breaker": "^1.1",
         "hyperf/validation": "^1.1",
         "phpmailer/phpmailer": "^6.1",
-        "gaotiefeng/redis-application": "^1.0"
+        "gaotiefeng/redis-application": "^1.0",
+        "hyperf/grpc-server": "^1.1",
+        "hyperf/grpc-client": "^1.1"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",
@@ -71,7 +73,9 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "GPBMetadata\\": "grpc/GPBMetadata",
+            "Grpc\\": "grpc/Grpc"
         },
         "files": [
             "app/Kernel/Function.php"
