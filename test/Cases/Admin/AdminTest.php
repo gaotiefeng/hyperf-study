@@ -33,7 +33,7 @@ class AdminTest extends HttpTestCase
     public function testAdminDelete()
     {
         $res = $this->adminClient->post('/admin/delete', [
-            'id' => 10,
+            'id' => 3,
         ]);
 
         $this->assertSame(0, $res['code']);

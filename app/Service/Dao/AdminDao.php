@@ -20,6 +20,7 @@ use App\Model\Admin;
 use App\Model\AdminRole;
 use App\Service\Service;
 use Hyperf\DbConnection\Db;
+use mysql_xdevapi\Exception;
 
 class AdminDao extends Service
 {
@@ -106,6 +107,17 @@ class AdminDao extends Service
      */
     public function delete(int $id)
     {
-        return Admin::query()->where('id', '=', $id)->delete();
+        Db::beginTransaction();
+        try {
+
+            $result = Admin::query()->where('id', '=', $id)->delete();
+            AdminRole::query()->where('admin_id', '=', $id)->delete();
+
+            return $result;
+            Db::commit();
+        }catch (\Exception $e){
+            Db::rollBack();
+            $this->logger->error('admin delete '.$e->getMessage());
+        };
     }
 }
