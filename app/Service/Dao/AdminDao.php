@@ -113,11 +113,12 @@ class AdminDao extends Service
             $result = Admin::query()->where('id', '=', $id)->delete();
             AdminRole::query()->where('admin_id', '=', $id)->delete();
 
-            return $result;
             Db::commit();
+            return $result;
         }catch (\Exception $e){
             Db::rollBack();
             $this->logger->error('admin delete '.$e->getMessage());
         };
+
     }
 }

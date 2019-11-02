@@ -91,7 +91,9 @@ class RoleController extends Controller
             throw new BusinessException(ErrorCode::SERVER_ERROR);
         }
 
-        return $this->response->success();
+        $result = $this->biz->delete($id);
+
+        return $this->response->success($result);
     }
 
     public function all()

@@ -48,4 +48,13 @@ class RoleTest extends HttpTestCase
         var_dump($res);
         $this->assertSame(0, $res['code']);
     }
+
+    public function testAdminRoleDelete()
+    {
+        $res = $this->adminClient->post('/role/delete', [
+            'id' => 3,
+        ]);
+
+        $this->assertSame(0, $res['code']);
+    }
 }
