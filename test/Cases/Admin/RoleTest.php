@@ -34,7 +34,7 @@ class RoleTest extends HttpTestCase
     {
         $res = $this->adminClient->post('/role/save', [
             'name' => '角色名称',
-            'route_id' => 1,
+            'route_id' => 2,
         ]);
 
         $this->assertSame(0, $res['code']);

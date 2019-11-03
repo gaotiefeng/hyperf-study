@@ -55,13 +55,13 @@ class RoleBiz extends Service
     {
         Db::beginTransaction();
         try {
-            $result = Role::query()->where('id','=',$id)->delete();
+            $result = Role::query()->where('id', '=', $id)->delete();
 
-            RoleRoute::query()->where('role_id','=',$id)->delete();
+            RoleRoute::query()->where('role_id', '=', $id)->delete();
             //TODO admin_role 数据处理
             Db::commit();
             return $result;
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             Db::rollBack();
             throw new BusinessException(ErrorCode::SERVER_ERROR);
         }

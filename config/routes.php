@@ -19,9 +19,7 @@ Router::addServer('admin', function () {
 });
 
 Router::addServer('grpc', function () {
-
     Router::addGroup('/grpc.hi', function () {
         Router::post('/sayHello', 'App\Controller\Rpc\GrpcController@sayHello');
     });
-
 });

@@ -1,13 +1,21 @@
 <?php
 
 declare(strict_types=1);
+/**
+ * This file is part of Hyperf.
+ *
+ * @link     https://www.hyperf.io
+ * @document https://doc.hyperf.io
+ * @contact  group@hyperf.io
+ * @license  https://github.com/hyperf-cloud/hyperf/blob/master/LICENSE
+ */
 
 namespace App\Controller\Rpc;
 
 use App\Controller\Controller;
 use App\Service\Client\RpcClient;
 
-class GrpcClientController extends  Controller
+class GrpcClientController extends Controller
 {
     public function hello()
     {
@@ -20,15 +28,15 @@ class GrpcClientController extends  Controller
         $request->setSex(1);
 
         /**
-         * @var \Grpc\HiReply $reply
+         * @var \Grpc\HiReply
          */
-        list($reply, $status) = $client->sayHello($request);
+        [$reply, $status] = $client->sayHello($request);
 
         $message = $reply->getMessage();
         $user = $reply->getUser();
 
         $client->close();
         var_dump(memory_get_usage(true));
-        return [$message,$user];
+        return [$message, $user];
     }
 }
