@@ -27,7 +27,7 @@ class GrpcClientController extends Controller
         $request->setName('hyperf');
         $request->setSex(1);
 
-        /**
+        /*
          * @var \Grpc\HiReply
          */
         [$reply, $status] = $client->sayHello($request);

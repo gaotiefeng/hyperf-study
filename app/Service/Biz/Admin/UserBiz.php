@@ -30,7 +30,6 @@ class UserBiz extends Service
     protected $dao;
 
     /**
-     * @param array $data
      * @return mixed
      */
     public function login(array $data)

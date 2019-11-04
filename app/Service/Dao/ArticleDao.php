@@ -26,8 +26,6 @@ use Throwable;
 class ArticleDao extends Service
 {
     /**
-     * @param int $articleId
-     * @param bool $throw
      * @return null|Model
      */
     public function first(int $articleId, bool $throw = false)
@@ -42,7 +40,6 @@ class ArticleDao extends Service
     }
 
     /**
-     * @param array $data
      * @param int $offset
      * @param int $limit
      * @return Collection|ModelHelper[]
@@ -91,8 +88,6 @@ class ArticleDao extends Service
     }
 
     /**
-     * @param int $userId
-     * @param array $data
      * @return Article
      */
     public function save(int $userId, array $data)

@@ -48,7 +48,6 @@ class AdminBiz extends Service
     }
 
     /**
-     * @param int $id
      * @return int|mixed
      */
     public function delete(int $id)

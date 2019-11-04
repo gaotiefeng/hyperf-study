@@ -43,7 +43,6 @@ class RouteBiz extends Service
     }
 
     /**
-     * @param array $data
      * @return bool
      */
     public function save(array $data)
@@ -52,7 +51,6 @@ class RouteBiz extends Service
     }
 
     /**
-     * @param int $id
      * @return int|mixed
      */
     public function delete(int $id)

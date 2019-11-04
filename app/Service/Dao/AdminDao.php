@@ -24,8 +24,6 @@ use Hyperf\DbConnection\Db;
 class AdminDao extends Service
 {
     /**
-     * @param int $id
-     * @param bool $throw
      * @return null|Admin
      */
     public function first(int $id, bool $throw = false)
@@ -72,7 +70,6 @@ class AdminDao extends Service
 
     /**
      * @param $mobile
-     * @param bool $throw
      * @param bool $is
      * @return null|\Hyperf\Database\Model\Builder|\Hyperf\Database\Model\Model|object
      */
@@ -101,7 +98,6 @@ class AdminDao extends Service
     }
 
     /**
-     * @param int $id
      * @return int|mixed
      */
     public function delete(int $id)

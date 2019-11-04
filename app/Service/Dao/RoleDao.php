@@ -30,7 +30,6 @@ class RoleDao extends Service
     }
 
     /**
-     * @param array $data
      * @return Role
      */
     public function save(array $data)

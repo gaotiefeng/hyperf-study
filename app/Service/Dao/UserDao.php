@@ -42,7 +42,6 @@ class UserDao extends Service
 
     /**
      * @param $mobile
-     * @param bool $throw
      * @return null|User
      */
     public function mobile($mobile, bool $throw = false)
@@ -58,7 +57,6 @@ class UserDao extends Service
     /**
      * @param $mobile
      * @param $password
-     * @return int
      */
     public function register($mobile, $password): int
     {

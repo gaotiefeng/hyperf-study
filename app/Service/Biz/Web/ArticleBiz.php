@@ -34,7 +34,6 @@ class ArticleBiz extends Service
     protected $articleUserDao;
 
     /**
-     * @param array $data
      * @param int $offset
      * @param int $limit
      * @return array
@@ -64,8 +63,6 @@ class ArticleBiz extends Service
     }
 
     /**
-     * @param int $userId
-     * @param array $data
      * @return Article
      */
     public function save(int $userId, array $data)

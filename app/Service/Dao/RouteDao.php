@@ -21,8 +21,6 @@ use App\Service\Service;
 class RouteDao extends Service
 {
     /**
-     * @param int $id
-     * @param bool $throw
      * @return null|Model
      */
     public function first(int $id, bool $throw = false)
@@ -44,7 +42,6 @@ class RouteDao extends Service
     }
 
     /**
-     * @param array $data
      * @return bool
      */
     public function save(array $data)
@@ -60,7 +57,6 @@ class RouteDao extends Service
     }
 
     /**
-     * @param int $id
      * @return int|mixed
      */
     public function delete(int $id)

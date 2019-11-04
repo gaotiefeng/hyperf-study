@@ -51,7 +51,6 @@ if (! function_exists('validator_mobile')) {
          * @param mixed $replacement
          * @param mixed $start
          * @param mixed $length
-         * @return string
          */
         function str_mobile($mobile, $replacement, $start, $length): string
         {
@@ -61,8 +60,6 @@ if (! function_exists('validator_mobile')) {
     if (! function_exists('format_throwable')) {
         /**
          * Format a throwable to string.
-         * @param Throwable $throwable
-         * @return string
          */
         function format_throwable(Throwable $throwable): string
         {

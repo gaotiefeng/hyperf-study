@@ -63,7 +63,6 @@ class RouteController extends Controller
     }
 
     /**
-     * @param RouteRequest $request
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function save(RouteRequest $request)

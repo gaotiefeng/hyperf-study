@@ -50,7 +50,6 @@ class UserBiz extends Service
     /**
      * @param $mobile
      * @param $password
-     * @return array
      */
     public function register($mobile, $password): array
     {
