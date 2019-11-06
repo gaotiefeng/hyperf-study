@@ -45,7 +45,7 @@ class CaptchaController extends Controller
         $build = $this->captcha->generate($code, $num, $width, $height);
 
         return $this->response->response()
-            ->withHeader('Content-type', 'image/jpeg')
+            ->withHeader('Content-type', 'image/png')
             ->withBody(new SwooleStream($build->get()));
     }
 }

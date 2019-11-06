@@ -18,7 +18,10 @@ use App\Controller\Controller;
 use App\Exception\BusinessException;
 use App\Service\Biz\Admin\UserBiz;
 use Hyperf\Di\Annotation\Inject;
+use Hyperf\HttpMessage\Stream\SwooleFileStream;
+use Hyperf\HttpMessage\Stream\SwooleStream;
 use Inhere\Validate\Validation;
+use PhpParser\Node\Scalar\MagicConst\File;
 
 class UserController extends Controller
 {
@@ -61,5 +64,17 @@ class UserController extends Controller
         $result = $this->biz->adminInfo($userId);
 
         return $this->response->success($result);
+    }
+
+    public function images()
+    {
+        $path = BASE_PATH.'/public/banner.png';
+
+        // 打开文件
+        $content = file_get_contents($path);
+
+        return $this->response->response()
+            ->withHeader('Content-type', 'image/png')
+            ->withbody(new SwooleStream($content));
     }
 }

@@ -30,6 +30,7 @@ Router::get('/role/all', 'App\Controller\Admin\RoleController::all');
 
 Router::post('/user/login', 'App\Controller\Admin\UserController::login');
 Router::get('/user/info', 'App\Controller\Admin\UserController::info');
+Router::get('/user/images', 'App\Controller\Admin\UserController::images');
 
 Router::get('/article/index', 'App\Controller\Admin\ArticleController::index');
 Router::get('/article/info', 'App\Controller\Admin\ArticleController::info');
